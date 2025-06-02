@@ -1027,14 +1027,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4658948412774825448, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
-      propertyPath: m_Size.x
-      value: 0.27258134
-      objectReference: {fileID: 0}
-    - target: {fileID: 4658948412774825448, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.0021651983
-      objectReference: {fileID: 0}
     - target: {fileID: 8010214772942058125, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
       propertyPath: m_Name
       value: Knife

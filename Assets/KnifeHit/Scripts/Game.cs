@@ -51,7 +51,7 @@ namespace KnifeHit.Scripts
         private void KnifeTriggerToOther(Collider2D coll)
         {
             var bonus = coll.GetComponent<BonusBase>();
-            if (bonus != null)
+            if (bonus)
             {
                 Destroy(bonus.gameObject);
             }
