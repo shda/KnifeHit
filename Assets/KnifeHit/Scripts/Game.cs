@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using BlockBlast.Scripts.Common;
-using BlockBlast.Scripts.Game;
 using Cysharp.Threading.Tasks;
+using KnifeHit.Scripts.Bonuses;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,7 +35,8 @@ namespace KnifeHit.Scripts
         {
             _currentKnife = knifePool.Get();
             _currentKnife.SwitchCollider(false);
-            _currentKnife.transform.SetParent(startSpawnKnife);
+            //_currentKnife.transform.SetParent(startSpawnKnife);
+            _currentKnife.transform.position = startSpawnKnife.position;
 
             _currentKnife.OnCollision = KnifeCollisionToOther;
             _currentKnife.OnTriggerEnter = KnifeTriggerToOther;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Bonuses
 {
     public abstract class BonusBase : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlockBlast.Scripts.Game
+namespace KnifeHit.Scripts.Levels
 {
     public class TargetMoving
     {

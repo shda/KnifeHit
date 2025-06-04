@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 72567101766399780}
-  - component: {fileID: 5371303654112421499}
+  - component: {fileID: 2614212970427759449}
   m_Layer: 0
   m_Name: BonusBase
   m_TagString: Untagged
@@ -120,8 +120,8 @@ Transform:
   - {fileID: 2926761726778628023}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &5371303654112421499
-CircleCollider2D:
+--- !u!60 &2614212970427759449
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,4 +155,22 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.17539781
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.098073006, y: 0.23787737}
+      - {x: -0.07416725, y: 0.2546215}
+      - {x: -0.41875654, y: -0.03520319}
+      - {x: -0.35415882, y: -0.18601406}
+      - {x: 0.00477314, y: -0.2538948}
+      - {x: 0.22065794, y: -0.09330487}
+      - {x: 0.20567799, y: 0.14584965}
+  m_UseDelaunayMesh: 0

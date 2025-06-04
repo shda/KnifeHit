@@ -1,11 +1,8 @@
 using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
-using KnifeHit.Scripts.Levels;
 using TMPro;
 using UnityEngine;
 
-namespace BlockBlast.Scripts.Game
+namespace KnifeHit.Scripts.Levels
 {
     public class LevelMaker : MonoBehaviour
     {
