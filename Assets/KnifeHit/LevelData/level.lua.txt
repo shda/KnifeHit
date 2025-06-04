@@ -1,0 +1,27 @@
+professorMessages = {
+	[[Команды <color="red">get_from_cell("")</color> и <color="red">set_to_cell("")</color> помогут роботу подбирать и помещать объекты в ячейки]],
+	[[Для повторного запуска кода, верни робота на исходную позицию кнопкой <sprite=3>]],
+	[[Управляй роботом с помощью команд <color="red">up()</color>, <color="red">right()</color>, <color="red">down()</color> и <color="red">left()</color>]],
+	[[Нажми на кнопку <sprite=4> в нижней панели, чтобы получить подсказки.]]
+}
+
+
+rotations =
+{
+	"a/-180/1,5",
+	"a/180/1,5",
+}
+
+
+setRotations(rotations)
+
+rotateAsync("a/-180/1,5")
+
+
+fun
+
+
+
+function Test()
+	 targetLuaConnector:Call()
+end

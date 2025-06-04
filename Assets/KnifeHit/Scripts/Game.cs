@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BlockBlast.Scripts.Common;
 using BlockBlast.Scripts.Game;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ namespace KnifeHit.Scripts
 {
     public class Game : MonoBehaviour
     {
+        [SerializeField] private float delayNextKnife;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private Transform startSpawnKnife;
         [SerializeField] private Target target;
@@ -32,6 +34,7 @@ namespace KnifeHit.Scripts
         private void PrepareNewKnife()
         {
             _currentKnife = knifePool.Get();
+            _currentKnife.SwitchCollider(false);
             _currentKnife.transform.SetParent(startSpawnKnife);
 
             _currentKnife.OnCollision = KnifeCollisionToOther;
@@ -48,7 +51,7 @@ namespace KnifeHit.Scripts
             gameOverScreen.Show();
         }
 
-        private void KnifeTriggerToOther(Collider2D coll)
+        private void KnifeTriggerToOther(Knife knife , Collider2D coll)
         {
             var bonus = coll.GetComponent<BonusBase>();
             if (bonus)
@@ -57,16 +60,14 @@ namespace KnifeHit.Scripts
             }
         }
 
-        private void KnifeCollisionToOther(Collision2D collision)
+        private void KnifeCollisionToOther(Knife knife , Collision2D collision)
         {
             var collisionTarget = collision.gameObject.GetComponent<Target>();
             if (collisionTarget)
             {
-                _currentKnife.IsMoving = false;
-                _currentKnife.SetStaticRigidbody2D();
-                _currentKnife.transform.SetParent(target.transform);
-
-                PrepareNewKnife();
+                knife.IsMoving = false;
+                knife.SetStaticRigidbody2D();
+                knife.transform.SetParent(target.transform);
                 
                 return;
             }
@@ -74,14 +75,27 @@ namespace KnifeHit.Scripts
             var otherKnife = collision.gameObject.GetComponent<Knife>();
             if (otherKnife)
             {
-                _currentKnife.IsMoving = false;
+                knife.IsMoving = false;
                 ShowGameOverScreen();
             }
         }
 
         private void OnClick()
         {
-            _currentKnife.KnifeThrow();
+            if (_currentKnife)
+            {
+                _currentKnife.SwitchCollider(true);
+                _currentKnife.KnifeThrow();
+                _currentKnife = null;
+            }
+            
+            DelayedCreateKnife(delayNextKnife);
+        }
+
+        private async void DelayedCreateKnife(float delay)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(delay));
+            PrepareNewKnife();
         }
     }
 }

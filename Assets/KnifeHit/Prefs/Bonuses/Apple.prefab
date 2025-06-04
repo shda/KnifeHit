@@ -48,9 +48,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 798459880427705526, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd5bcb75b37e6e47a7d47a890dcd198, type: 3}
+    - target: {fileID: 2926761726778628023, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926761726778628023, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8970055718973506592, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
       propertyPath: m_Name
-      value: BonusBase Variant
+      value: Apple
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
