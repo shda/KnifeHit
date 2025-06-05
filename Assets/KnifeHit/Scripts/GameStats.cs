@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts
 {
-    [CreateAssetMenu(menuName = "Create GameSessionInfo", fileName = "GameSessionInfo", order = 0)]
-    public class GameSessionInfo : ScriptableObject
+    [CreateAssetMenu(menuName = "Create GameStats", fileName = "GameStats", order = 0)]
+    public class GameStats : ScriptableObject
     {
-        public  IntReactiveProperty CountTopBonuses { get;set; } = new();
+        public IntReactiveProperty CountTopBonuses { get;set; } = new();
         public IntReactiveProperty CountCurrentBonuses { get;set; } = new();
         public IntReactiveProperty CountUserKnives { get;set; } = new();
         public IntReactiveProperty CountAllUserKnives { get;set; } = new();

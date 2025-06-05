@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.LuaLogic
 {
-    public class LuaLoaderLogic : MonoBehaviour
+    public class LuaScriptLoader : MonoBehaviour
     {
         [SerializeField] private LuaAsset luaAsset;
         [SerializeField] private LevelLuaProxy  levelLuaProxy;

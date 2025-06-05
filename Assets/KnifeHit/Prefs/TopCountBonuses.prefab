@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a60fa1310fa4726b061ec4612b35534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSessionInfo: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
+  gameStats: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
   countTopBonuses: {fileID: 5088721053235278786}
 --- !u!1 &5887956948959140204
 GameObject:

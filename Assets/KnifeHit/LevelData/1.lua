@@ -1,10 +1,3 @@
--- Для работы старого кода
-function setUserKnifeSkin(skin) level:SetUserKnifeSkin(skin) end
-function setTargetSkin(skin) level:SetTargetSkin(skin) end
-function setBonus(index , rotation) level:SetBonus(index , rotation) end
-function setObstacle(index , rotation) level:SetObstacle(index , rotation) end
-function rotateAsync(str) level:RotateAsync(index , rotation) end
-
 rotations =
 {
     "o/360/1,5",

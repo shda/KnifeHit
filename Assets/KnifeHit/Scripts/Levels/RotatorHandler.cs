@@ -8,47 +8,17 @@ namespace KnifeHit.Scripts.Levels
     public class RotatorHandler : MonoBehaviour
     {
         [SerializeField] private Transform target;
-        
         private CancellationTokenSource _cancellation;
-        
-        public void PlayLevel(string levelData , Action<RotationData> OnStep = null)
-        {
-            _cancellation?.Cancel();
-            _cancellation = new CancellationTokenSource();
-            target.rotation = Quaternion.identity;
-            PlayLevelAsync(levelData , OnStep , _cancellation.Token).Forget();
-        }
-        
-        private async UniTask PlayLevelAsync(string levelData , Action<RotationData> onStep , CancellationToken token)
-        {
-            var parse = RotationsParser.ParseInput(levelData);
-            var indexStep = 0;
-            while (!token.IsCancellationRequested)
-            {
-                var step = parse[indexStep % parse.Count];
-                onStep?.Invoke(step);
-                
-                await PlayStep(step , token);
-                indexStep++;
-                
-                await UniTask.Yield();
-            }
-        }
-        
-        public async UniTask PlayStep(RotationData stepData , CancellationToken token)
+
+        public async UniTask PlayStepAsync(RotationData stepData , CancellationToken token)
         {
             if (token.IsCancellationRequested)
                 return;
             
-            await RotateObjectAsync(stepData, token);
+            await RotationAsync(stepData, token);
         }
 
-        private void OnDestroy()
-        {
-            _cancellation?.Cancel();
-        }
-
-        public async UniTask RotateObjectAsync(RotationData targetAngle, CancellationToken token)
+        private async UniTask RotationAsync(RotationData targetAngle, CancellationToken token)
         {
             if(token.IsCancellationRequested)
                 return;
@@ -81,6 +51,11 @@ namespace KnifeHit.Scripts.Levels
             }
             
             target.rotation = Quaternion.Euler(0,0,endRotation);
+        }
+        
+        private void OnDestroy()
+        {
+            _cancellation?.Cancel();
         }
     }
 }

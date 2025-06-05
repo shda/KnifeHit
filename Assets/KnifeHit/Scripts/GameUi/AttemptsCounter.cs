@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.GameUi
 {
-    public class PanelIconsCountUserKnifes : MonoBehaviour
+    public class AttemptsCounter : MonoBehaviour
     {
-        [SerializeField] private PoolGameObjectsComponent<KnifIcon> poolIcons;
+        [SerializeField] private PoolGameObjectsComponent<KnifeIcon> poolIcons;
         
-        private readonly List<KnifIcon> _listKnifes = new();
+        private readonly List<KnifeIcon> _listKnifes = new();
         
         public void SetCountKnifes(int allCount , int countEnable)
         {
@@ -51,7 +51,7 @@ namespace KnifeHit.Scripts.GameUi
         {
             Debug.Log($"Awake");
             
-            var icons = transform.GetComponentsInChildren<KnifIcon>();
+            var icons = transform.GetComponentsInChildren<KnifeIcon>();
             foreach (var icon in icons)
             {
                 poolIcons.Release(icon);

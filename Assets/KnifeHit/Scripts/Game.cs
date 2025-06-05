@@ -5,6 +5,7 @@ using KnifeHit.Scripts.Bonuses;
 using KnifeHit.Scripts.Lists;
 using KnifeHit.Scripts.LuaLogic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts
 {
@@ -15,10 +16,10 @@ namespace KnifeHit.Scripts
         [SerializeField] private Transform startSpawnKnife;
         [SerializeField] private Target target;
         [SerializeField] private GameOverScreen  gameOverScreen;
-        [SerializeField] private LuaLoaderLogic luaLoaderLogic;
+        [SerializeField] private LuaScriptLoader luaScriptLoader;
         [SerializeField] private ListKnifes listKnifes;
         
-        [SerializeField] private GameSessionInfo gameSessionInfo;
+        [SerializeField] private GameStats gameStats;
         
         private int _skinIndex;
         private Knife _currentKnife;
@@ -26,7 +27,7 @@ namespace KnifeHit.Scripts
 
         public void Restart()
         {
-            gameSessionInfo.LoadValues();
+            gameStats.LoadValues();
             
             foreach (var usedKnife in _usedKnifes)
             {
@@ -36,7 +37,7 @@ namespace KnifeHit.Scripts
 
             gameOverScreen.Hide();
             target.RemoveOldObjects();
-            luaLoaderLogic.StartLevel();
+            luaScriptLoader.StartLevel();
         }
         
         private void Start()
@@ -58,7 +59,7 @@ namespace KnifeHit.Scripts
 
         private void ShowGameOverScreen()
         {
-            gameSessionInfo.SaveValues();
+            gameStats.SaveValues();
             gameOverScreen.OnRestartGame = () =>
             {
                 Restart();
@@ -79,11 +80,11 @@ namespace KnifeHit.Scripts
 
         private void AddBonus()
         {
-            gameSessionInfo.CountCurrentBonuses.Value++;
-            if (gameSessionInfo.CountCurrentBonuses.Value > gameSessionInfo.CountTopBonuses.Value)
+            gameStats.CountCurrentBonuses.Value++;
+            if (gameStats.CountCurrentBonuses.Value > gameStats.CountTopBonuses.Value)
             {
-                gameSessionInfo.CountTopBonuses.Value = gameSessionInfo.CountCurrentBonuses.Value;
-                gameSessionInfo.SaveValues();
+                gameStats.CountTopBonuses.Value = gameStats.CountCurrentBonuses.Value;
+                gameStats.SaveValues();
             }
         }
 
@@ -117,8 +118,8 @@ namespace KnifeHit.Scripts
                 _currentKnife = null;
             }
 
-            gameSessionInfo.CountUserKnives.Value--;
-            if (gameSessionInfo.CountUserKnives.Value > 0)
+            gameStats.CountUserKnives.Value--;
+            if (gameStats.CountUserKnives.Value > 0)
             {
                 DelayedCreateKnife(delayNextKnife);
             }
@@ -148,8 +149,8 @@ namespace KnifeHit.Scripts
         
         public void SetCountAllKnives(int all , int current)
         {
-            gameSessionInfo.CountAllUserKnives.SetValueAndForceNotify(all);
-            gameSessionInfo.CountUserKnives.SetValueAndForceNotify(current);
+            gameStats.CountAllUserKnives.SetValueAndForceNotify(all);
+            gameStats.CountUserKnives.SetValueAndForceNotify(current);
         }
     }
 }

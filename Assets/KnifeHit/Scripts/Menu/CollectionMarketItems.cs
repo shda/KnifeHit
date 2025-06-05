@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.Menu
 {
-    [CreateAssetMenu(menuName = "Create CollectionBuyItems", fileName = "CollectionBuyItems", order = 0)]
-    public class CollectionBuyItems : ScriptableObject
+    [CreateAssetMenu(menuName = "Create CollectionMarketItems", fileName = "CollectionMarketItems", order = 0)]
+    public class CollectionMarketItems : ScriptableObject
     {
         [SerializeField] private ItemInfo[] itemBuyInfos;
         

@@ -1,3 +1,5 @@
+using System;
+using UniRx;
 using UnityEngine;
 
 namespace KnifeHit.Scripts.Levels
@@ -35,6 +37,11 @@ namespace KnifeHit.Scripts.Levels
         {
             PlayerPrefs.SetString(NameSave, inputField.text);
             game.Restart();
+        }
+
+        public void Convert()
+        {
+            inputField.text = ReplacerOldLuaCode.Convert(inputField.text);
         }
     }
 }

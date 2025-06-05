@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4104101180392997153, guid: 77fa7bf68c680af45bbf817cc936711b, type: 3}
       propertyPath: m_Name
-      value: TopCountBonuses
+      value: BestScoreLabel
       objectReference: {fileID: 0}
     - target: {fileID: 7451840800753190939, guid: 77fa7bf68c680af45bbf817cc936711b, type: 3}
       propertyPath: m_Pivot.x
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 223819357}
   - component: {fileID: 223819359}
   m_Layer: 5
-  m_Name: AlreadyBuyLabel
+  m_Name: LabelAlreadyBuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 492788490}
   - component: {fileID: 492788489}
   m_Layer: 5
-  m_Name: SelectKnife
+  m_Name: IconSelectedKnife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 525222626}
   - component: {fileID: 525222627}
   m_Layer: 0
-  m_Name: SelectKnife
+  m_Name: ShipMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 1003785065}
   - component: {fileID: 1003785068}
   m_Layer: 5
-  m_Name: GridKnifes
+  m_Name: ShopGridItems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1232,9 +1232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2f8314251a4f1db4752568b3a42692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridItemPrefab: {fileID: 5567088628820355391, guid: 488bc3a6e7b3c4c4e95c872c3c07e505, type: 3}
+  shopItemPrefab: {fileID: 5567088628820355391, guid: 488bc3a6e7b3c4c4e95c872c3c07e505, type: 3}
   gridItemParent: {fileID: 1770193895}
-  collectionBuyItems: {fileID: 11400000, guid: b940adc031950e34e84dc40833f504ca, type: 2}
+  collectionMarketItems: {fileID: 11400000, guid: b940adc031950e34e84dc40833f504ca, type: 2}
   gridSelector: {fileID: 753230588}
 --- !u!1 &1046126548
 GameObject:
@@ -1449,7 +1449,7 @@ GameObject:
   - component: {fileID: 1342804283}
   - component: {fileID: 1342804286}
   m_Layer: 5
-  m_Name: ButtonPlay
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1601,7 +1601,7 @@ GameObject:
   - component: {fileID: 1347695190}
   - component: {fileID: 1347695191}
   m_Layer: 0
-  m_Name: StartMenu
+  m_Name: WelcomeMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1684,8 +1684,8 @@ MonoBehaviour:
   gameScene:
     asset: {fileID: 102900000, guid: 1f4fe681c121fd24f9779da30b133301, type: 3}
     guid: 1f4fe681c121fd24f9779da30b133301
-  startMenu: {fileID: 1347695191}
-  selectKnifeMenu: {fileID: 525222627}
+  welcomeMenu: {fileID: 1347695191}
+  shopMenu: {fileID: 525222627}
 --- !u!1 &1371949770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,7 +1848,7 @@ GameObject:
   - component: {fileID: 1536419848}
   - component: {fileID: 1536419847}
   m_Layer: 5
-  m_Name: ButtonSelectKnife
+  m_Name: OpenShopButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2279,7 +2279,7 @@ GameObject:
   - component: {fileID: 1828150032}
   - component: {fileID: 1828150031}
   m_Layer: 5
-  m_Name: ButtonHome
+  m_Name: WelcomeMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2638,20 +2638,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3691412027467701051}
   m_CullTransparentMesh: 1
---- !u!114 &3488439990872679114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6518973994342253430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a60fa1310fa4726b061ec4612b35534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameSessionInfo: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
-  countTopBonuses: {fileID: 2599275030197203349}
 --- !u!1 &3691412027467701051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,9 +2724,8 @@ GameObject:
   - component: {fileID: 425308356563536460}
   - component: {fileID: 8385521824252752646}
   - component: {fileID: 202982779853417308}
-  - component: {fileID: 3488439990872679114}
   m_Layer: 0
-  m_Name: BuyCountBonuses
+  m_Name: PriceLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2894,7 +2879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1936942766127652127, guid: 488bc3a6e7b3c4c4e95c872c3c07e505, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: ShopItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

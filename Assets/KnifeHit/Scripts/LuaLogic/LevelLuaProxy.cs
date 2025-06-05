@@ -89,7 +89,7 @@ namespace KnifeHit.Scripts.LuaLogic
             if (cancellation.IsCancellationRequested)
                 return 0;
 
-            await rotatorHandler.PlayStep(result, cancellation);
+            await rotatorHandler.PlayStepAsync(result, cancellation);
     
             return 0;
         }

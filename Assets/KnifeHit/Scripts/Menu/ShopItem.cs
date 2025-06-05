@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 namespace KnifeHit.Scripts.Menu
 {
-    public class GridItem : MonoBehaviour
+    public class ShopItem : MonoBehaviour
     {
         [SerializeField] private Image image;
         
         public bool IsOpen { get; set; }
         public ItemInfo ItemInfo { get; set; }
         
-        public Action<GridItem> OnPress;
+        public Action<ShopItem> OnPress;
 
         public void OnPressItem()
         {

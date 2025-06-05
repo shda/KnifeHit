@@ -1,31 +1,32 @@
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts.GameUi
 {
     public class GameSceneUi : MonoBehaviour
     {
-        [SerializeField] private PanelIconsCountUserKnifes panelIconsCountUserKnifes;
-        [SerializeField] private GameSessionInfo gameSessionInfo;
+        [SerializeField] private AttemptsCounter attemptsCounter;
+        [SerializeField] private GameStats gameStats;
         [SerializeField] private TextMeshProUGUI countCurrentBonuses;
 
         private void Awake()
         {
-            gameSessionInfo.CountCurrentBonuses.Subscribe(i =>
+            gameStats.CountCurrentBonuses.Subscribe(i =>
             {
                 countCurrentBonuses.text = i.ToString();
             }).AddTo(this);;
             
-            gameSessionInfo.CountUserKnives.Subscribe(OnChangeCountUserKnives).AddTo(this);
-            gameSessionInfo.CountAllUserKnives.Subscribe(OnChangeCountUserKnives).AddTo(this);
+            gameStats.CountUserKnives.Subscribe(OnChangeCountUserKnives).AddTo(this);
+            gameStats.CountAllUserKnives.Subscribe(OnChangeCountUserKnives).AddTo(this);
         }
 
         private void OnChangeCountUserKnives(int count)
         {
-            panelIconsCountUserKnifes.SetCountKnifes(
-                gameSessionInfo.CountAllUserKnives.Value , 
-                gameSessionInfo.CountUserKnives.Value);
+            attemptsCounter.SetCountKnifes(
+                gameStats.CountAllUserKnives.Value , 
+                gameStats.CountUserKnives.Value);
         }
     }
 }

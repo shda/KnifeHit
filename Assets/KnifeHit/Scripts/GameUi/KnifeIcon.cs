@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.GameUi
 {
-    public class KnifIcon : MonoBehaviour
+    public class KnifeIcon : MonoBehaviour
     {
         [SerializeField] private Transform enableKnife;
         

@@ -2,14 +2,15 @@ using System;
 using Eflatun.SceneReference;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts.Menu
 {
     public class MainMenu : MonoBehaviour
     {
         [SerializeField] private SceneReference gameScene;
-        [SerializeField] private StartMenu startMenu;
-        [SerializeField] private SelectKnifeMenu selectKnifeMenu;
+        [SerializeField] private WelcomeMenu welcomeMenu;
+        [SerializeField] private ShopMenu shopMenu;
 
         private void Awake()
         {
@@ -24,14 +25,14 @@ namespace KnifeHit.Scripts.Menu
 
         public void OnPressButtonOperSelectKnife()
         {
-            startMenu.gameObject.SetActive(false);
-            selectKnifeMenu.gameObject.SetActive(true);
+            welcomeMenu.gameObject.SetActive(false);
+            shopMenu.gameObject.SetActive(true);
         }
 
         public void OnPressButtonHome()
         {
-            startMenu.gameObject.SetActive(true);
-            selectKnifeMenu.gameObject.SetActive(false);
+            welcomeMenu.gameObject.SetActive(true);
+            shopMenu.gameObject.SetActive(false);
         }
     }
 }

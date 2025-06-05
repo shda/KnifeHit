@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.Menu
 {
-    public class GridKnifes : MonoBehaviour
+    public class ShopGridItems : MonoBehaviour
     {
-        [SerializeField] private GridItem gridItemPrefab;
+        [SerializeField] private ShopItem shopItemPrefab;
         [SerializeField] private Transform gridItemParent;
-        [SerializeField] private CollectionBuyItems collectionBuyItems;
+        [SerializeField] private CollectionMarketItems collectionMarketItems;
         [SerializeField] private GridSelector gridSelector;
 
 
@@ -15,10 +15,10 @@ namespace KnifeHit.Scripts.Menu
         {
             RemoveOldItems();
 
-            GridItem firstSelected = null;
-            foreach (var item in collectionBuyItems.ItemBuyInfos)
+            ShopItem firstSelected = null;
+            foreach (var item in collectionMarketItems.ItemBuyInfos)
             {
-                var newItem = Instantiate(gridItemPrefab, gridItemParent);
+                var newItem = Instantiate(shopItemPrefab, gridItemParent);
                 newItem.transform.localPosition = Vector3.zero;
                 newItem.transform.localScale = Vector3.one;
                 newItem.SetInfo(item);
@@ -36,7 +36,7 @@ namespace KnifeHit.Scripts.Menu
 
         private void RemoveOldItems()
         {
-            var items = gridItemParent.GetComponentsInChildren<GridItem>();
+            var items = gridItemParent.GetComponentsInChildren<ShopItem>();
             foreach (var item in items)
             {
                 Destroy(item.gameObject);
