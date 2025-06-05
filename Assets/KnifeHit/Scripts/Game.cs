@@ -122,7 +122,12 @@ namespace KnifeHit.Scripts
             {
                 DelayedCreateKnife(delayNextKnife);
             }
+            else
+            {
+                ShowGameOverScreen();
+            }
         }
+        
 
         private async void DelayedCreateKnife(float delay)
         {

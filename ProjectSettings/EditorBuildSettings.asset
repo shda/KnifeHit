@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/KnifeHit/Scenes/MainMenu.unity
+    guid: f526deb6cf501414e8ca7f767b036004
+  - enabled: 1
     path: Assets/KnifeHit/Scenes/KnifeHit.unity
     guid: 1f4fe681c121fd24f9779da30b133301
   m_configObjects:
