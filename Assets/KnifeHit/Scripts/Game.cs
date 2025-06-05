@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using BlockBlast.Scripts.Common;
 using Cysharp.Threading.Tasks;
 using KnifeHit.Scripts.Bonuses;
+using KnifeHit.Scripts.Lists;
+using KnifeHit.Scripts.LuaLogic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace KnifeHit.Scripts
 {
@@ -15,14 +15,30 @@ namespace KnifeHit.Scripts
         [SerializeField] private Transform startSpawnKnife;
         [SerializeField] private Target target;
         [SerializeField] private GameOverScreen  gameOverScreen;
-        [SerializeField] private PoolGameObjectsComponent<Knife> knifePool;
+        [SerializeField] private LuaLevelLogic luaLevelLogic;
+        [SerializeField] private ListKnifes listKnifes;
 
+        private int _skinIndex;
         private Knife _currentKnife;
-        private List<Knife> _usedKnifes;
+        private List<Knife> _usedKnifes = new();
 
+        public void Restart()
+        {
+            foreach (var usedKnife in _usedKnifes)
+            {
+                if(usedKnife)
+                    DestroyImmediate(usedKnife.gameObject);
+            }
+
+            gameOverScreen.Hide();
+            target.RemoveOldObjects();
+            luaLevelLogic.StartLevel();
+        }
+        
         private void Awake()
         {
-            knifePool.Init();
+            Restart();
+            // knifePool.Init();
         }
 
         private void Start()
@@ -33,7 +49,7 @@ namespace KnifeHit.Scripts
 
         private void PrepareNewKnife()
         {
-            _currentKnife = knifePool.Get();
+            _currentKnife = Instantiate(listKnifes.GetWithOverflow(_skinIndex));
             _currentKnife.SwitchCollider(false);
             //_currentKnife.transform.SetParent(startSpawnKnife);
             _currentKnife.transform.position = startSpawnKnife.position;
@@ -46,7 +62,7 @@ namespace KnifeHit.Scripts
         {
             gameOverScreen.OnRestartGame = () =>
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Restart();
             };
             
             gameOverScreen.Show();
@@ -87,6 +103,7 @@ namespace KnifeHit.Scripts
             {
                 _currentKnife.SwitchCollider(true);
                 _currentKnife.KnifeThrow();
+                _usedKnifes.Add(_currentKnife);
                 _currentKnife = null;
             }
             
@@ -96,6 +113,17 @@ namespace KnifeHit.Scripts
         private async void DelayedCreateKnife(float delay)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
+            PrepareNewKnife();
+        }
+
+        public void SetKnifeSkin(int skinIndex)
+        {
+            _skinIndex = skinIndex;
+            if (_currentKnife)
+            {
+                DestroyImmediate(_currentKnife.gameObject);
+            }
+            
             PrepareNewKnife();
         }
     }

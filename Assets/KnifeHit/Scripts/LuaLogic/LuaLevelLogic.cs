@@ -1,13 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using BlockBlast.Scripts.Common.Extensions;
 using Cysharp.Threading.Tasks;
 using KnifeHit.Scripts.Levels;
 using KnifeHit.Scripts.Lists;
 using Lua;
 using Lua.Unity;
-using TMPro;
 using UnityEngine;
 
 namespace KnifeHit.Scripts.LuaLogic
@@ -16,40 +14,59 @@ namespace KnifeHit.Scripts.LuaLogic
     {
         [SerializeField] private LevelPlayer levelPlayer;
         [SerializeField] private LuaAsset luaAsset;
-        
-        [SerializeField] private ListBonuses  listBonuses;
+
+        [SerializeField] private ListBonuses listBonuses;
         [SerializeField] private ListKnifes listKnifes;
         [SerializeField] private Target target;
+        [SerializeField] private Game game;
 
         private LuaState _luaState;
 
         private CancellationTokenSource _cancellation;
-        
-        private void Awake()
-        {
-            LoadLevelFromLuaLogic(luaAsset.Text);
-        }
 
-        public async void LoadLevelFromLuaLogic(string luaCode)
+        public void StartLevel()
         {
             _cancellation?.Cancel();
             _cancellation = new CancellationTokenSource();
+           
             
-            _luaState = LuaState.Create();
-            
-            _luaState.Environment["rotateAsync"] = new LuaFunction(RotateAsync);
-            _luaState.Environment["setUserKnifeSkin"] = new LuaFunction(SetUserKnifeSkin);
-            _luaState.Environment["setTargetSkin"] = new LuaFunction(SetTargetSkin);
-            _luaState.Environment["setBonus"] = new LuaFunction(SetBonus);
-            _luaState.Environment["setObstacle"] = new LuaFunction(SetObstacle);
-            
-            var results = await _luaState.DoStringAsync(luaCode , cancellationToken: _cancellation.Token);
-            var func = results[0].Read<LuaFunction>();
-
-            while (!_cancellation.Token.IsCancellationRequested)
+            var text = PlayerPrefs.GetString(LevelMaker.NameSave);
+            if (!string.IsNullOrEmpty(text))
             {
-                await func.InvokeAsync(_luaState, Array.Empty<LuaValue>() , cancellationToken:_cancellation.Token);
-                await UniTask.Yield();
+                LoadLevelFromLuaLogic(text , _cancellation.Token);
+            }
+            else
+            {
+                LoadLevelFromLuaLogic(luaAsset.Text , _cancellation.Token);
+                PlayerPrefs.SetString(LevelMaker.NameSave, luaAsset.Text);
+            }
+        }
+
+        public async void LoadLevelFromLuaLogic(string luaCode, CancellationToken token)
+        {
+            await UniTask.Yield();
+
+            try
+            {
+                _luaState = LuaState.Create();
+                _luaState.Environment["rotateAsync"] = new LuaFunction(RotateAsync);
+                _luaState.Environment["setUserKnifeSkin"] = new LuaFunction(SetUserKnifeSkin);
+                _luaState.Environment["setTargetSkin"] = new LuaFunction(SetTargetSkin);
+                _luaState.Environment["setBonus"] = new LuaFunction(SetBonus);
+                _luaState.Environment["setObstacle"] = new LuaFunction(SetObstacle);
+
+                var results = await _luaState.DoStringAsync(luaCode, cancellationToken: token);
+                var func = results[0].Read<LuaFunction>();
+
+                while (!token.IsCancellationRequested)
+                {
+                    await func.InvokeAsync(_luaState, Array.Empty<LuaValue>(), cancellationToken: token);
+                    await UniTask.Yield();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
             }
         }
 
@@ -67,7 +84,7 @@ namespace KnifeHit.Scripts.LuaLogic
             {
                 param.Angle = context.GetArgument<int>(1);
             }
-            
+
             if (context.ArgumentCount > 2)
             {
                 param.AddOffset = context.GetArgument<float>(2);
@@ -77,74 +94,93 @@ namespace KnifeHit.Scripts.LuaLogic
         }
 
         private ValueTask<int> SetObstacle(
-            LuaFunctionExecutionContext context, 
+            LuaFunctionExecutionContext context,
             Memory<LuaValue> values, CancellationToken cancellation)
         {
+            if (cancellation.IsCancellationRequested)
+                return new ValueTask<int>(0);
+
             Debug.Log("SetObstacle");
-            
+
             var methodParameters = GetMethodParameters(context);
             var knife = Instantiate(listKnifes.GetWithOverflow(methodParameters.IndexObject));
             knife.IsMoving = false;
             knife.SetStaticRigidbody2D();
-            
-            target.AddObject(knife.gameObject ,  methodParameters.Angle , 180);
-            
-            return new (0);
+
+            target.AddObject(knife.gameObject, methodParameters.Angle, 180);
+
+            return new(0);
         }
 
         private ValueTask<int> SetBonus(
-            LuaFunctionExecutionContext context, 
+            LuaFunctionExecutionContext context,
             Memory<LuaValue> values, CancellationToken cancellation)
         {
+            if (cancellation.IsCancellationRequested)
+                return new ValueTask<int>(0);
+
             Debug.Log("SetBonus");
-
-           // var bonusNumber = context.GetArgument<string>(0).ToInt();
-           // var angle = context.GetArgument<int>(1);
-
             var methodParameters = GetMethodParameters(context);
-
             var bonus = Instantiate(listBonuses.GetWithOverflow(methodParameters.IndexObject));
-            target.AddObject(bonus.gameObject , methodParameters.Angle);
-            
-           // Debug.Log("SetBonus "  + bonusNumber);
-            
-            return new (0);
+            target.AddObject(bonus.gameObject, methodParameters.Angle);
+
+            return new(0);
         }
 
         private ValueTask<int> SetTargetSkin(
-            LuaFunctionExecutionContext context, 
+            LuaFunctionExecutionContext context,
             Memory<LuaValue> values, CancellationToken cancellation)
         {
-            Debug.Log("SetTargetSkin");
-            
-            return new (0);
+            if (cancellation.IsCancellationRequested)
+                return new ValueTask<int>(0);
+
+            var skinIndex = GetMethodParameters(context);
+            target.SetSkin(skinIndex.IndexObject);
+            Debug.Log("SetTargetSkin " + skinIndex.IndexObject);
+
+            return new(0);
         }
 
         private ValueTask<int> SetUserKnifeSkin(
-            LuaFunctionExecutionContext context, 
+            LuaFunctionExecutionContext context,
             Memory<LuaValue> values, CancellationToken cancellation)
         {
+            if (cancellation.IsCancellationRequested)
+                return new ValueTask<int>(0);
+
             Debug.Log("SetUserKnifeSkin");
-            
-            return new (0);
+
+            var skinIndex = GetMethodParameters(context);
+            game.SetKnifeSkin(skinIndex.IndexObject);
+
+            return new(0);
         }
 
         private async ValueTask<int> RotateAsync(
             LuaFunctionExecutionContext context,
             Memory<LuaValue> values, CancellationToken cancellation)
         {
+            await UniTask.Yield();
+            Debug.Log("Rotate");
+
+            if (cancellation.IsCancellationRequested)
+                return 0;
+
             var listRotations = context.GetArgument<string>(0);
             var result = LevelParser.ParseLine(listRotations);
-            
+
             Debug.Log(listRotations);
 
             if (cancellation.IsCancellationRequested)
                 return 0;
-            
+
             await levelPlayer.PlayStep(result, cancellation);
             return 0;
         }
-        
-        
+
+        private void OnDestroy()
+        {
+            _cancellation?.Cancel();
+        }
     }
 }

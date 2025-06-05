@@ -1,18 +1,25 @@
 using System;
+using System.Linq;
+using KnifeHit.Scripts.Lists;
 using UnityEngine;
 
 namespace KnifeHit.Scripts
 {
     public class Target : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Transform child;
+        [SerializeField] private ListSkins skins; 
         [SerializeField] private float offset;
-
-        private GameObject _obj;
-        private int _angle;
+        
+        public void SetSkin(int index)
+        {
+            spriteRenderer.sprite = skins.GetWithOverflow(index);
+        }
         
         public void AddObject(GameObject obj, int angle , float addRotation = 0)
         {
-            obj.transform.SetParent(transform);
+            obj.transform.SetParent(child);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
             
@@ -22,19 +29,15 @@ namespace KnifeHit.Scripts
             
             //Return rotation
             obj.transform.rotation = Quaternion.Euler(0,0,  obj.transform.eulerAngles.z + 180 + addRotation);
-            
-            _obj = obj;
-            _angle = angle;
         }
 
-        /*
-        private void Update()
+        public void RemoveOldObjects()
         {
-            if (_obj != null)
+            var children = child.Cast<Transform>().ToArray();
+            foreach (var c in children)
             {
-                AddObject(_obj , _angle);
+                DestroyImmediate(c.gameObject);
             }
         }
-        */
     }
 }

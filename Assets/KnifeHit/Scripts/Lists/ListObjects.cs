@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.Lists
 {
-    public class ListObjects<T> : ScriptableObject where T : Component
+    public class ListObjects<T> : ScriptableObject where T : Object
     {
         [SerializeField] private T[] list;
         public T[] List => list;
@@ -13,7 +13,7 @@ namespace KnifeHit.Scripts.Lists
             if (index < 0)
                 index = 0;
             
-            return list[index & list.Length];
+            return list[index % list.Length];
         }
     }
 }

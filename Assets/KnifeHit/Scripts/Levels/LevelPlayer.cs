@@ -61,6 +61,9 @@ namespace KnifeHit.Scripts.Levels
 
         public async UniTask RotateObjectAsync(TargetMoving targetAngle, CancellationToken token)
         {
+            if(token.IsCancellationRequested)
+                return;
+            
             var startRotation = target.eulerAngles;
             var endRotation = targetAngle.Angle;
             
@@ -76,17 +79,19 @@ namespace KnifeHit.Scripts.Levels
             
             while (elapsedTime < targetAngle.Duretion)
             {
+                if(token.IsCancellationRequested)
+                    return;
+                
                 var t = elapsedTime / targetAngle.Duretion;
                 var z = current + (targetRot - current) * t ;
                 
-
                 target.rotation = Quaternion.Euler(0,0,z);
                 
                 elapsedTime += Time.deltaTime;
                 await UniTask.Yield();
-                if(token.IsCancellationRequested)
-                    return;
             }
+            
+            target.rotation = Quaternion.Euler(0,0,endRotation);
         }
     }
 }

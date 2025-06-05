@@ -34,13 +34,13 @@ namespace KnifeHit.Scripts
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            Debug.Log(other.collider.gameObject.name);
+           // Debug.Log(other.collider.gameObject.name);
             OnCollision?.Invoke(this,other);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log(other.gameObject.name);
+           // Debug.Log(other.gameObject.name);
             OnTriggerEnter?.Invoke(this, other);
         }
 

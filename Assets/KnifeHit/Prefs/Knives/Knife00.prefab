@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 10e4fb8400cf38b41aed3aba7125c68c, type: 3}
+    - target: {fileID: 5545563243070605098, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
+      propertyPath: movingSpeed.y
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8010214772942058125, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
       propertyPath: m_Name
       value: Knife00

@@ -1,22 +1,21 @@
-using System;
-using TMPro;
 using UnityEngine;
 
 namespace KnifeHit.Scripts.Levels
 {
     public class LevelMaker : MonoBehaviour
     {
-        [SerializeField] private TMP_InputField inputField;
-        [SerializeField] private TextMeshProUGUI stepText;
+        [SerializeField] private LuaCodeEditor inputField;
         [SerializeField] private GameObject editor;
         [SerializeField] private LevelPlayer levelPlayer;
-        
+        [SerializeField] private Game game;
+
+        public static string NameSave = "Editor4";
         public void OnPressButtonOpenEditor()
         {
             if (editor.activeInHierarchy)
             {
                 editor.SetActive(false);
-                CloseEditor();
+                Restart();
             }
             else
             {
@@ -24,34 +23,19 @@ namespace KnifeHit.Scripts.Levels
                 OpenEditor();
             }
         }
-
-
         private void OpenEditor()
         {
-            var ed = PlayerPrefs.GetString("Editor");
+            var ed = PlayerPrefs.GetString(NameSave);
             if (!string.IsNullOrEmpty(ed))
             {
                 inputField.text = ed;
             }
         }
-
-        private void CloseEditor()
-        {
-            PlayerPrefs.SetString("Editor" , inputField.text);
-            
-            try
-            {
-                var parse = LevelParser.ParseInput(inputField.text);
-                levelPlayer.PlayLevel(inputField.text , moving =>
-                {
-                    stepText.text = moving.StringStep;
-                });
-            }
-            catch (Exception e)
-            {
-                Debug.LogException(e);
-            }
-        }
         
+        public void Restart()
+        {
+            PlayerPrefs.SetString(NameSave, inputField.text);
+            game.Restart();
+        }
     }
 }
