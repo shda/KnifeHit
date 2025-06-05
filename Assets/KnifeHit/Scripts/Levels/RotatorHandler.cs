@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.Levels
 {
-    public class LevelPlayer : MonoBehaviour
+    public class RotatorHandler : MonoBehaviour
     {
         [SerializeField] private Transform target;
         
@@ -22,7 +22,7 @@ namespace KnifeHit.Scripts.Levels
             */
         }
 
-        public void PlayLevel(string levelData , Action<TargetMoving> OnStep = null)
+        public void PlayLevel(string levelData , Action<RotationData> OnStep = null)
         {
             _cancellation?.Cancel();
             _cancellation = new CancellationTokenSource();
@@ -30,9 +30,9 @@ namespace KnifeHit.Scripts.Levels
             PlayLevelAsync(levelData , OnStep , _cancellation.Token).Forget();
         }
         
-        private async UniTask PlayLevelAsync(string levelData , Action<TargetMoving> onStep , CancellationToken token)
+        private async UniTask PlayLevelAsync(string levelData , Action<RotationData> onStep , CancellationToken token)
         {
-            var parse = LevelParser.ParseInput(levelData);
+            var parse = RotationsParser.ParseInput(levelData);
             var indexStep = 0;
             while (!token.IsCancellationRequested)
             {
@@ -46,7 +46,7 @@ namespace KnifeHit.Scripts.Levels
             }
         }
         
-        public async UniTask PlayStep(TargetMoving stepData , CancellationToken token)
+        public async UniTask PlayStep(RotationData stepData , CancellationToken token)
         {
             if (token.IsCancellationRequested)
                 return;
@@ -59,7 +59,7 @@ namespace KnifeHit.Scripts.Levels
             _cancellation?.Cancel();
         }
 
-        public async UniTask RotateObjectAsync(TargetMoving targetAngle, CancellationToken token)
+        public async UniTask RotateObjectAsync(RotationData targetAngle, CancellationToken token)
         {
             if(token.IsCancellationRequested)
                 return;
@@ -77,12 +77,12 @@ namespace KnifeHit.Scripts.Levels
             var current = target.eulerAngles.z;
             var targetRot = endRotation;
             
-            while (elapsedTime < targetAngle.Duretion)
+            while (elapsedTime < targetAngle.Duration)
             {
                 if(token.IsCancellationRequested)
                     return;
                 
-                var t = elapsedTime / targetAngle.Duretion;
+                var t = elapsedTime / targetAngle.Duration;
                 var z = current + (targetRot - current) * t ;
                 
                 target.rotation = Quaternion.Euler(0,0,z);

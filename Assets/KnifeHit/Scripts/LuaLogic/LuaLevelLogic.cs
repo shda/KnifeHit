@@ -12,7 +12,7 @@ namespace KnifeHit.Scripts.LuaLogic
 {
     public class LuaLevelLogic : MonoBehaviour
     {
-        [SerializeField] private LevelPlayer levelPlayer;
+        [SerializeField] private RotatorHandler rotatorHandler;
         [SerializeField] private LuaAsset luaAsset;
 
         [SerializeField] private ListBonuses listBonuses;
@@ -30,7 +30,7 @@ namespace KnifeHit.Scripts.LuaLogic
             _cancellation = new CancellationTokenSource();
            
             
-            var text = PlayerPrefs.GetString(LevelMaker.NameSave);
+            var text = PlayerPrefs.GetString(LevelEditorController.NameSave);
             if (!string.IsNullOrEmpty(text))
             {
                 LoadLevelFromLuaLogic(text , _cancellation.Token);
@@ -38,7 +38,7 @@ namespace KnifeHit.Scripts.LuaLogic
             else
             {
                 LoadLevelFromLuaLogic(luaAsset.Text , _cancellation.Token);
-                PlayerPrefs.SetString(LevelMaker.NameSave, luaAsset.Text);
+                PlayerPrefs.SetString(LevelEditorController.NameSave, luaAsset.Text);
             }
         }
 
@@ -54,6 +54,7 @@ namespace KnifeHit.Scripts.LuaLogic
                 _luaState.Environment["setTargetSkin"] = new LuaFunction(SetTargetSkin);
                 _luaState.Environment["setBonus"] = new LuaFunction(SetBonus);
                 _luaState.Environment["setObstacle"] = new LuaFunction(SetObstacle);
+                _luaState.Environment["setCountKnives"] = new LuaFunction(SetCountKnives);
 
                 var results = await _luaState.DoStringAsync(luaCode, cancellationToken: token);
                 var func = results[0].Read<LuaFunction>();
@@ -68,6 +69,11 @@ namespace KnifeHit.Scripts.LuaLogic
             {
                 Debug.LogException(e);
             }
+        }
+
+        private ValueTask<int> SetCountKnives(LuaFunctionExecutionContext arg1, Memory<LuaValue> arg2, CancellationToken arg3)
+        {
+            return new(0);
         }
 
         private LuaObjParam GetMethodParameters(LuaFunctionExecutionContext context)
@@ -167,14 +173,14 @@ namespace KnifeHit.Scripts.LuaLogic
                 return 0;
 
             var listRotations = context.GetArgument<string>(0);
-            var result = LevelParser.ParseLine(listRotations);
+            var result = RotationsParser.ParseLine(listRotations);
 
             Debug.Log(listRotations);
 
             if (cancellation.IsCancellationRequested)
                 return 0;
 
-            await levelPlayer.PlayStep(result, cancellation);
+            await rotatorHandler.PlayStep(result, cancellation);
             return 0;
         }
 

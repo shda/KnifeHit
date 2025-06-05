@@ -4,18 +4,10 @@ using System.Linq;
 
 namespace KnifeHit.Scripts.Levels
 {
-    public class TargetMoving
+    public static class RotationsParser
     {
-        public float Angle { get; set; }
-        public float Duretion { get; set; }
-        public bool IsOffset { get; set; }
-        
-        public string StringStep { get; set; }
-    }
-    
-    public class LevelParser
-    {
-        public static TargetMoving ParseLine(string line)
+        //o/160/4,3 такая строка
+        public static RotationData ParseLine(string line)
         {
             string trimmedLine = line.Trim();
             
@@ -51,10 +43,10 @@ namespace KnifeHit.Scripts.Levels
                         System.Globalization.NumberStyles.Any, 
                         System.Globalization.CultureInfo.InvariantCulture, out float secondNumber))
                 {
-                    return new TargetMoving()
+                    return new RotationData()
                     {
                         Angle = firstNumber,
-                        Duretion = secondNumber,
+                        Duration = secondNumber,
                         IsOffset = pos.ToLower() == "o",
                         StringStep = trimmedLine,
                     };
@@ -64,7 +56,7 @@ namespace KnifeHit.Scripts.Levels
             return null;
         }
         
-        public static List<TargetMoving> ParseInput(string input)
+        public static List<RotationData> ParseInput(string input)
         {
             var lines = input.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             return lines.Select(ParseLine).Where(result => result != null).ToList();
