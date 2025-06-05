@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eac7e44979cb4cae96d7dab44fd26ff6, type: 3}
-  m_Name: ListSkins
+  m_Name: ListTargetSkins
   m_EditorClassIdentifier: 
   list:
   - {fileID: 21300000, guid: 7f1071d3454dac341b3666959598b595, type: 3}

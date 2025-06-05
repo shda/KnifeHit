@@ -50,6 +50,7 @@ public class LuaLevel : MonoBehaviour
 
     public async void CreateLua()
     {
+        /*
         var state = LuaState.Create();
         state.Environment["setRotations"] = new LuaFunction((context, buffer, ct) =>
         {
@@ -66,6 +67,7 @@ public class LuaLevel : MonoBehaviour
         });
         
         var results = await state.DoStringAsync(levelData.text);
+        */
     }
     // Update is called once per frame
     void Update()

@@ -13,8 +13,15 @@ namespace KnifeHit.Scripts.GameUi
         
         public void SetCountKnifes(int allCount , int countEnable)
         {
-            ReturnLastIcons();
-            CreateNewIcons(allCount, countEnable);
+            Debug.Log($"SetCountKnifes {allCount} - {countEnable}");
+            
+            if (_listKnifes.Count != allCount)
+            {
+                ReturnLastIcons();
+                CreateNewIcons(allCount, countEnable);
+            }
+            
+            UpdateEnableKnifes(countEnable);
         }
 
         private void CreateNewIcons(int allCount, int countEnable)
@@ -24,14 +31,26 @@ namespace KnifeHit.Scripts.GameUi
                 var newIcon = poolIcons.Get();
                 newIcon.transform.SetParent(transform);
                 newIcon.transform.localScale = Vector3.one;
+                newIcon.transform.localPosition = Vector3.zero;
                 newIcon.transform.SetAsFirstSibling();
-                newIcon.SwitchShowKnife(countEnable > i);
+                newIcon.SetShowKnife(countEnable > i);
                 _listKnifes.Add(newIcon);
+            }
+        }
+
+        private void UpdateEnableKnifes(int countEnable)
+        {
+            for (int i = 0; i < _listKnifes.Count; i++)
+            {
+                _listKnifes[i].SetShowKnife(countEnable > i);
+                _listKnifes[i].gameObject.SetActive(true);
             }
         }
 
         private void Awake()
         {
+            Debug.Log($"Awake");
+            
             var icons = transform.GetComponentsInChildren<KnifIcon>();
             foreach (var icon in icons)
             {

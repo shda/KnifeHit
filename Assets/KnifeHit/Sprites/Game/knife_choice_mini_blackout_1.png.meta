@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      knife_choice_mini_blackout_1_0: 1368070582699342636
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

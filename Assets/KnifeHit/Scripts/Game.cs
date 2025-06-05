@@ -15,15 +15,19 @@ namespace KnifeHit.Scripts
         [SerializeField] private Transform startSpawnKnife;
         [SerializeField] private Target target;
         [SerializeField] private GameOverScreen  gameOverScreen;
-        [SerializeField] private LuaLevelLogic luaLevelLogic;
+        [SerializeField] private LuaLoaderLogic luaLoaderLogic;
         [SerializeField] private ListKnifes listKnifes;
-
+        
+        [SerializeField] private GameSessionInfo gameSessionInfo;
+        
         private int _skinIndex;
         private Knife _currentKnife;
-        private List<Knife> _usedKnifes = new();
+        private readonly List<Knife> _usedKnifes = new();
 
         public void Restart()
         {
+            gameSessionInfo.LoadValues();
+            
             foreach (var usedKnife in _usedKnifes)
             {
                 if(usedKnife)
@@ -32,26 +36,20 @@ namespace KnifeHit.Scripts
 
             gameOverScreen.Hide();
             target.RemoveOldObjects();
-            luaLevelLogic.StartLevel();
+            luaLoaderLogic.StartLevel();
         }
         
-        private void Awake()
-        {
-            Restart();
-            // knifePool.Init();
-        }
-
         private void Start()
         {
             inputHandler.OnClick = OnClick;
-            PrepareNewKnife();
+            Restart();
         }
 
         private void PrepareNewKnife()
         {
             _currentKnife = Instantiate(listKnifes.GetWithOverflow(_skinIndex));
             _currentKnife.SwitchCollider(false);
-            //_currentKnife.transform.SetParent(startSpawnKnife);
+
             _currentKnife.transform.position = startSpawnKnife.position;
 
             _currentKnife.OnCollision = KnifeCollisionToOther;
@@ -60,6 +58,7 @@ namespace KnifeHit.Scripts
 
         private void ShowGameOverScreen()
         {
+            gameSessionInfo.SaveValues();
             gameOverScreen.OnRestartGame = () =>
             {
                 Restart();
@@ -73,7 +72,18 @@ namespace KnifeHit.Scripts
             var bonus = coll.GetComponent<BonusBase>();
             if (bonus)
             {
+                AddBonus();
                 Destroy(bonus.gameObject);
+            }
+        }
+
+        private void AddBonus()
+        {
+            gameSessionInfo.CountCurrentBonuses.Value++;
+            if (gameSessionInfo.CountCurrentBonuses.Value > gameSessionInfo.CountTopBonuses.Value)
+            {
+                gameSessionInfo.CountTopBonuses.Value = gameSessionInfo.CountCurrentBonuses.Value;
+                gameSessionInfo.SaveValues();
             }
         }
 
@@ -106,8 +116,12 @@ namespace KnifeHit.Scripts
                 _usedKnifes.Add(_currentKnife);
                 _currentKnife = null;
             }
-            
-            DelayedCreateKnife(delayNextKnife);
+
+            gameSessionInfo.CountUserKnives.Value--;
+            if (gameSessionInfo.CountUserKnives.Value > 0)
+            {
+                DelayedCreateKnife(delayNextKnife);
+            }
         }
 
         private async void DelayedCreateKnife(float delay)
@@ -125,6 +139,12 @@ namespace KnifeHit.Scripts
             }
             
             PrepareNewKnife();
+        }
+        
+        public void SetCountAllKnives(int all , int current)
+        {
+            gameSessionInfo.CountAllUserKnives.SetValueAndForceNotify(all);
+            gameSessionInfo.CountUserKnives.SetValueAndForceNotify(current);
         }
     }
 }

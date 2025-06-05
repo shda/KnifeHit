@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bg_wood_3_color_behind_0: -717756437033851988
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

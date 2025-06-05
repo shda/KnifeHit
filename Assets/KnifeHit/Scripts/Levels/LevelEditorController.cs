@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts.Levels
 {
@@ -7,7 +6,6 @@ namespace KnifeHit.Scripts.Levels
     {
         [SerializeField] private LuaCodeEditor inputField;
         [SerializeField] private GameObject editor;
-        [SerializeField] private RotatorHandler rotatorHandler;
         [SerializeField] private Game game;
 
         public static string NameSave = "Editor4";

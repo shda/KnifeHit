@@ -7,7 +7,7 @@ namespace KnifeHit.Scripts.GameUi
     {
         [SerializeField] private Transform enableKnife;
         
-        public void SwitchShowKnife(bool isShow)
+        public void SetShowKnife(bool isShow)
         {
             enableKnife.gameObject.SetActive(isShow);
         }

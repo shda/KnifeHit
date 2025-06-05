@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bg_wood_2_blackout_0: 1130220159551135500
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,18 +10,7 @@ namespace KnifeHit.Scripts.Levels
         [SerializeField] private Transform target;
         
         private CancellationTokenSource _cancellation;
-
-        private void Awake()
-        {
-            /*
-            var ed = PlayerPrefs.GetString("Editor");
-            if (!string.IsNullOrEmpty(ed))
-            {
-                PlayLevel(ed);
-            }
-            */
-        }
-
+        
         public void PlayLevel(string levelData , Action<RotationData> OnStep = null)
         {
             _cancellation?.Cancel();
