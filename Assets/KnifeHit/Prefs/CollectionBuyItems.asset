@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa07b6c20f834d449a6e162007d0b702, type: 3}
+  m_Name: CollectionBuyItems
+  m_EditorClassIdentifier: 
+  itemBuyInfos:
+  - knifeSprite: {fileID: 21300000, guid: 4737f5b9800e9b8489b90e21c573db56, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: e472f6987a4fd8a419cd87f201bc501a, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: 6d5a4c00f140fde46a20dbd77016627d, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: 86ec4052013669041933c701f87acaf6, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: 96dfd626cf3b63140bc00a75ad29e1ce, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: 769b907efe0b7eb4b949c1d81075cb88, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: 72cbc503af828f246a3eb37df9349c29, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: 81b7c213a2220ac428ed39999cb04632, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: a213e99a3f0b07a408d197ea3b8ab263, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: e9bf5d0c3d9c8be47be2cd554a17ca96, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: a213e99a3f0b07a408d197ea3b8ab263, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: 2336cf73aa0e3694f99bff421d8f42eb, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: 11917afcc805a1448abcf72d47c4af65, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: b6707567fbff8684ab2f666fe2308c7d, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: a5a67c29b5c5ed4439f50dc0c4ab84eb, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: 56ea17075fc99254fb74a53440111055, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: 3c2227b5f25be2c4584bf182204f09e9, type: 3}
+    shadowKnifeSprite: {fileID: 21300000, guid: 4f1bbc759802b394babcf242b60fbe5b, type: 3}

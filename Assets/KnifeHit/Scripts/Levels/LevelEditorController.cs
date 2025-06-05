@@ -8,7 +8,7 @@ namespace KnifeHit.Scripts.Levels
         [SerializeField] private GameObject editor;
         [SerializeField] private Game game;
 
-        public static string NameSave = "Editor4";
+        public static string NameSave = "Editor5";
         public void OnPressButtonOpenEditor()
         {
             if (editor.activeInHierarchy)

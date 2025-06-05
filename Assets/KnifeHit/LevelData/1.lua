@@ -1,4 +1,4 @@
--- Для работы старого кода если используются старые методы
+-- Для работы старого кода
 function setUserKnifeSkin(skin) level:SetUserKnifeSkin(skin) end
 function setTargetSkin(skin) level:SetTargetSkin(skin) end
 function setBonus(index , rotation) level:SetBonus(index , rotation) end
@@ -35,8 +35,12 @@ level:SetObstacle(0 , 0)
 --level:SetObstacle(6 , 180)
 --level:SetObstacle(7 , 210)
 
+skin = 0
 while true do
   for i = 1, #rotations do
         level:RotateAsync(rotations[i])
+		
+		--skin = skin + 1
+		--level:SetTargetSkin(skin)
     end
 end

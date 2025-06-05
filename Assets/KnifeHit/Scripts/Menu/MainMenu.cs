@@ -13,8 +13,7 @@ namespace KnifeHit.Scripts.Menu
 
         private void Awake()
         {
-            startMenu.gameObject.SetActive(true);
-            selectKnifeMenu.gameObject.SetActive(false);
+            OnPressButtonHome();
         }
 
 
@@ -27,6 +26,12 @@ namespace KnifeHit.Scripts.Menu
         {
             startMenu.gameObject.SetActive(false);
             selectKnifeMenu.gameObject.SetActive(true);
+        }
+
+        public void OnPressButtonHome()
+        {
+            startMenu.gameObject.SetActive(true);
+            selectKnifeMenu.gameObject.SetActive(false);
         }
     }
 }
