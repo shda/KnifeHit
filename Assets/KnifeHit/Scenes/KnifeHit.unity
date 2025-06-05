@@ -274,6 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelIconsCountUserKnifes: {fileID: 1318297907}
   gameSessionInfo: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
+  countTopBonuses: {fileID: 1152716240}
+  countCurrentBonuses: {fileID: 1844617513}
 --- !u!1 &75734021 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4907516694499408881, guid: f04d75ebd0663ee45842724db73c32ad, type: 3}
@@ -1200,7 +1202,7 @@ GameObject:
   - component: {fileID: 1010198505}
   - component: {fileID: 1010198504}
   m_Layer: 0
-  m_Name: LasyCountBonuses
+  m_Name: TopCountBonuses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1224,7 +1226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -20.149979}
+  m_AnchoredPosition: {x: -20, y: -20.149963}
   m_SizeDelta: {x: 0, y: 28.5}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1010198504
@@ -1952,7 +1954,7 @@ GameObject:
   - component: {fileID: 1427350039}
   - component: {fileID: 1427350038}
   m_Layer: 0
-  m_Name: CountBonuses
+  m_Name: CurrentCountBonuses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1975,7 +1977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -20.14998}
+  m_AnchoredPosition: {x: 20, y: -20.149994}
   m_SizeDelta: {x: 0, y: 28.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1427350038
