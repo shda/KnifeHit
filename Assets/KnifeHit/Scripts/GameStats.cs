@@ -15,16 +15,6 @@ namespace KnifeHit.Scripts
         public ReactiveProperty<HashSet<int>> OpenedShopItems { get;set; } = new();
         public IntReactiveProperty IndexSelectKnife { get;set; } = new();
         
-        public void LoadValues()
-        {
-           // CountCurrentBonuses.Value = 0;
-            CountTopBonuses.Value = PlayerPrefs.GetInt(nameof(CountTopBonuses));
-            LastOpenedLevel.Value = PlayerPrefs.GetInt(nameof(LastOpenedLevel));
-            IndexSelectKnife.Value = PlayerPrefs.GetInt(nameof(IndexSelectKnife));
-            
-            ParsingBoughtItems();
-        }
-        
         private void ParsingBoughtItems()
         {
            var openedItemsStr = PlayerPrefs.GetString(nameof(OpenedShopItems));
@@ -42,6 +32,15 @@ namespace KnifeHit.Scripts
                openedItems[i] = int.Parse(openedItemsArr[i]);
            }
            OpenedShopItems.Value = new HashSet<int>(openedItems);
+        }
+        
+        public void LoadValues()
+        {
+            CountTopBonuses.Value = PlayerPrefs.GetInt(nameof(CountTopBonuses));
+            LastOpenedLevel.Value = PlayerPrefs.GetInt(nameof(LastOpenedLevel));
+            IndexSelectKnife.Value = PlayerPrefs.GetInt(nameof(IndexSelectKnife));
+            
+            ParsingBoughtItems();
         }
 
         public void SaveValues()

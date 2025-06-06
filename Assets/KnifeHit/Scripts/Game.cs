@@ -76,9 +76,7 @@ namespace KnifeHit.Scripts
             _currentKnife = Instantiate(listKnifes.GetWithOverflow(_skinIndex));
             _currentKnife.SwitchCollider(false);
             _currentKnife.SetVelocity(_knifeSpeed);
-
             _currentKnife.transform.position = startSpawnKnife.position;
-
             _currentKnife.OnCollision = KnifeCollisionToOther;
             _currentKnife.OnTriggerEnter = KnifeTriggerToOther;
         }
@@ -87,11 +85,8 @@ namespace KnifeHit.Scripts
         {
             gameStats.CountCurrentBonuses.Value = 0;
             gameStats.SaveValues();
-            gameOverScreen.OnRestartGame = () =>
-            {
-                ResetLevelToDefault();
-            };
             
+            gameOverScreen.OnRestartGame = ResetLevelToDefault;
             gameOverScreen.Show();
         }
 
@@ -102,7 +97,6 @@ namespace KnifeHit.Scripts
             {
                 AddBonus();
                 bonus.PlayCompleteAnimation();
-                //Destroy(bonus.gameObject);
             }
         }
 
