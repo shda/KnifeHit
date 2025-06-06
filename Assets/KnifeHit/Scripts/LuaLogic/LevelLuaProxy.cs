@@ -49,7 +49,7 @@ namespace KnifeHit.Scripts.LuaLogic
 
             Debug.Log("SetBonus");
             var bonus = Object.Instantiate(listBonuses.GetWithOverflow(index));
-            target.AddObject(bonus.gameObject, angle);
+            target.AddObject(bonus, angle);
         }
 
         [LuaMember]
@@ -84,7 +84,7 @@ namespace KnifeHit.Scripts.LuaLogic
             knife.IsMoving = false;
             knife.SetStaticRigidbody2D();
 
-            target.AddObject(knife.gameObject, angle, 180);
+            target.AddObject(knife, angle, 180);
         }
 
         

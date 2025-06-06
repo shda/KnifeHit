@@ -14,9 +14,6 @@ namespace KnifeHit.Scripts
         
         [SerializeField] private Vector2 minMaxVelocity;
         
-       // [SerializeField] private Vector2 linearVelocity;
-       // [SerializeField] private float angularVelocity;
-        
         [Button]
         public void StartAnimation()
         {

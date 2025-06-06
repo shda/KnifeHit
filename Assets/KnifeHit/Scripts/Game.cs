@@ -11,13 +11,13 @@ namespace KnifeHit.Scripts
     public class Game : MonoBehaviour
     {
         [SerializeField] private float delayNextKnife;
+        [Space]
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private Transform startSpawnKnife;
         [SerializeField] private Target target;
         [SerializeField] private GameOverScreen  gameOverScreen;
         [SerializeField] private LuaScriptLoader luaScriptLoader;
         [SerializeField] private ListKnifes listKnifes;
-        
         [SerializeField] private GameStats gameStats;
 
         private float _knifeSpeed;
@@ -35,9 +35,10 @@ namespace KnifeHit.Scripts
             delayNextKnife = delayBetweenKnifes;
         }
         
-        public void Restart()
+        public void ResetLevelToDefault()
         {
             inputHandler.enabled = true;
+            
             gameStats.LoadValues();
             target.SetDefaultSize();
             
@@ -55,7 +56,7 @@ namespace KnifeHit.Scripts
         private void Start()
         {
             inputHandler.OnClick = OnClick;
-            Restart();
+            ResetLevelToDefault();
         }
 
         private void PrepareNewKnife()
@@ -75,7 +76,7 @@ namespace KnifeHit.Scripts
             gameStats.SaveValues();
             gameOverScreen.OnRestartGame = () =>
             {
-                Restart();
+                ResetLevelToDefault();
             };
             
             gameOverScreen.Show();
@@ -113,6 +114,7 @@ namespace KnifeHit.Scripts
             var otherKnife = collision.gameObject.GetComponent<Knife>();
             if (otherKnife)
             {
+                inputHandler.enabled = false;
                 knife.IsMoving = false;
                 knife.PlayCompleteAnimation();
                 ShowGameOverScreen();
@@ -145,7 +147,7 @@ namespace KnifeHit.Scripts
                 }
                 */
 
-                DelayedRestart(3);
+                DelayedRestart(2);
                 //ShowGameOverScreen();
             }
         }
@@ -160,7 +162,7 @@ namespace KnifeHit.Scripts
             
             
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
-            Restart();
+            ResetLevelToDefault();
         }
 
         private async void DelayedCreateKnife(float delay)

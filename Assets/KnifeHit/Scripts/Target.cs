@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -17,10 +17,18 @@ namespace KnifeHit.Scripts
         [SerializeField] private HitTargetAnimation hitTargetAnimation;
         
         private Vector3 _defaultSize;
+        
+        private readonly List<TargetObject> _addObjects = new();
 
         private void Awake()
         {
             _defaultSize =  transform.localScale;
+            
+            var children = child.Cast<Transform>().ToArray();
+            foreach (var c in children)
+            {
+                DestroyImmediate(c.gameObject);
+            }
         }
 
         public void SetSkin(int index)
@@ -33,7 +41,7 @@ namespace KnifeHit.Scripts
             transform.localScale = _defaultSize;
         }
         
-        public void AddObject(GameObject obj, int angle , float addRotation = 0)
+        public void AddObject(TargetObject obj, int angle , float addRotation = 0)
         {
             obj.transform.SetParent(child);
             obj.transform.localPosition = Vector3.zero;
@@ -45,23 +53,31 @@ namespace KnifeHit.Scripts
             
             //Return rotation
             obj.transform.rotation = Quaternion.Euler(0,0,  obj.transform.eulerAngles.z + 180 + addRotation);
+            
+            _addObjects.Add(obj);
         }
-
+        
         public void RemoveOldObjects()
         {
-            var children = child.Cast<Transform>().ToArray();
-            foreach (var c in children)
+            foreach (var addObject in _addObjects)
             {
-                DestroyImmediate(c.gameObject);
+                if (addObject != null)
+                {
+                    DestroyImmediate(addObject.gameObject);
+                }
             }
+            
+            _addObjects.Clear();
         }
-
-        public async UniTask AnimationEndLevelAsync()
+        
+        public void AnimationEndLevelAsync()
         {
-            var children = child.Cast<Transform>().ToArray();
-            foreach (var c in children)
+            foreach (var obj in _addObjects)
             {
-                c.GetComponent<TargetObject>()?.PlayCompleteAnimation();
+                if (obj)
+                {
+                    obj.PlayCompleteAnimation();
+                }
             }
 
             transform.DOScale(new Vector3(0, 0, 0), 0.5f);
@@ -74,6 +90,8 @@ namespace KnifeHit.Scripts
             knife.transform.SetParent(child);
             
             hitTargetAnimation.PlayAnimation();
+            
+            _addObjects.Add(knife);
         }
     }
 }

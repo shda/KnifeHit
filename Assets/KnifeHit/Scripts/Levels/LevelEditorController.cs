@@ -36,7 +36,7 @@ namespace KnifeHit.Scripts.Levels
         public void Restart()
         {
             PlayerPrefs.SetString(NameSave, inputField.text);
-            game.Restart();
+            game.ResetLevelToDefault();
         }
 
         public void Convert()

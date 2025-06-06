@@ -15,7 +15,7 @@ namespace KnifeHit.Scripts.GameUi
         {
             Debug.Log($"SetCountKnifes {allCount} - {countEnable}");
             
-            if (_listKnifes.Count != allCount)
+            if (_listKnifes.Count != allCount || _listKnifes.Count < countEnable)
             {
                 ReturnLastIcons();
                 CreateNewIcons(allCount, countEnable);
