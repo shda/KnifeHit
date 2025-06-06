@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -10,16 +12,52 @@ namespace KnifeHit.Scripts
         public IntReactiveProperty CountCurrentBonuses { get;set; } = new();
         public IntReactiveProperty CountUserKnives { get;set; } = new();
         public IntReactiveProperty CountAllUserKnives { get;set; } = new();
+        public IntReactiveProperty LastOpenedLevel { get;set; } = new();
+        public ReactiveProperty<HashSet<int>> OpenedShopItems { get;set; } = new();
+        
+        public IntReactiveProperty IndexSelectKnife { get;set; } = new();
         
         public void LoadValues()
         {
             CountCurrentBonuses.Value = 0;
             CountTopBonuses.Value = PlayerPrefs.GetInt(nameof(CountTopBonuses));
+            LastOpenedLevel.Value = PlayerPrefs.GetInt(nameof(LastOpenedLevel));
+            IndexSelectKnife.Value = PlayerPrefs.GetInt(nameof(IndexSelectKnife));
+            
+            ParsingBoughtItems();
+        }
+        
+        private void ParsingBoughtItems()
+        {
+           var openedItemsStr = PlayerPrefs.GetString(nameof(OpenedShopItems));
+           if (string.IsNullOrEmpty(openedItemsStr))
+           {
+               OpenedShopItems.Value = new HashSet<int>();
+               return;
+           }
+           
+           // Парсинг строки "0,2,3,4,5,6"
+           var openedItemsArr = openedItemsStr.Split(',');
+           var openedItems = new int[openedItemsArr.Length];
+           for (var i = 0; i < openedItemsArr.Length; i++)
+           {
+               openedItems[i] = int.Parse(openedItemsArr[i]);
+           }
+           OpenedShopItems.Value = new HashSet<int>(openedItems);
         }
 
         public void SaveValues()
         {
             PlayerPrefs.SetInt(nameof(CountTopBonuses), CountTopBonuses.Value);
+            PlayerPrefs.SetInt(nameof(LastOpenedLevel), LastOpenedLevel.Value);
+            PlayerPrefs.SetInt(nameof(IndexSelectKnife), IndexSelectKnife.Value);
+            PlayerPrefs.SetString(nameof(OpenedShopItems), string.Join(",", OpenedShopItems.Value));
+        }
+        
+        public void SelectItem(int itemIndex)
+        {
+            IndexSelectKnife.Value = itemIndex;
+            SaveValues();
         }
     }
 }

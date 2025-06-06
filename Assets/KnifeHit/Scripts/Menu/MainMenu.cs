@@ -1,8 +1,8 @@
 using System;
 using Eflatun.SceneReference;
+using KnifeHit.Scripts.Menu.Shop;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts.Menu
 {
@@ -14,10 +14,9 @@ namespace KnifeHit.Scripts.Menu
 
         private void Awake()
         {
-            OnPressButtonHome();
+            //OnPressButtonHome();
         }
-
-
+        
         public void OnPressButtonPlay()
         {
             SceneManager.LoadScene(gameScene.Name);

@@ -1,7 +1,7 @@
-
+using System;
 using UnityEngine;
 
-namespace KnifeHit.Scripts.Menu
+namespace KnifeHit.Scripts.Menu.Shop
 {
     public class ShopGridItems : MonoBehaviour
     {
@@ -9,8 +9,10 @@ namespace KnifeHit.Scripts.Menu
         [SerializeField] private Transform gridItemParent;
         [SerializeField] private CollectionMarketItems collectionMarketItems;
         [SerializeField] private GridSelector gridSelector;
+        [SerializeField] private GameStats gameStats;
 
-
+        public Action<ShopItem> OnPressShopItem;
+        
         private void Start()
         {
             RemoveOldItems();
@@ -21,17 +23,20 @@ namespace KnifeHit.Scripts.Menu
                 var newItem = Instantiate(shopItemPrefab, gridItemParent);
                 newItem.transform.localPosition = Vector3.zero;
                 newItem.transform.localScale = Vector3.one;
-                newItem.SetInfo(item);
-                newItem.OnPress = gridItem =>
-                {
-                    gridSelector.SetTargetRect(gridItem.GetComponent<RectTransform>());
-                };
+                newItem.SetInfo(item , gameStats);
+                newItem.OnPress = OnPress;
                 
                 if(!firstSelected)
                     firstSelected = newItem;
             }
 
-            gridSelector.SetTargetRect(firstSelected.GetComponent<RectTransform>());
+            OnPress(firstSelected);
+        }
+
+        private void OnPress(ShopItem gridItem)
+        {
+            OnPressShopItem?.Invoke(gridItem);
+            gridSelector.SetTargetRect(gridItem.GetComponent<RectTransform>());
         }
 
         private void RemoveOldItems()
