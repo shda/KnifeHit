@@ -49,8 +49,6 @@ namespace KnifeHit.Scripts.GameUi
 
         private void Awake()
         {
-            Debug.Log($"Awake");
-            
             var icons = transform.GetComponentsInChildren<KnifeIcon>();
             foreach (var icon in icons)
             {

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -14,12 +13,11 @@ namespace KnifeHit.Scripts
         public IntReactiveProperty CountAllUserKnives { get;set; } = new();
         public IntReactiveProperty LastOpenedLevel { get;set; } = new();
         public ReactiveProperty<HashSet<int>> OpenedShopItems { get;set; } = new();
-        
         public IntReactiveProperty IndexSelectKnife { get;set; } = new();
         
         public void LoadValues()
         {
-            CountCurrentBonuses.Value = 0;
+           // CountCurrentBonuses.Value = 0;
             CountTopBonuses.Value = PlayerPrefs.GetInt(nameof(CountTopBonuses));
             LastOpenedLevel.Value = PlayerPrefs.GetInt(nameof(LastOpenedLevel));
             IndexSelectKnife.Value = PlayerPrefs.GetInt(nameof(IndexSelectKnife));
@@ -52,12 +50,6 @@ namespace KnifeHit.Scripts
             PlayerPrefs.SetInt(nameof(LastOpenedLevel), LastOpenedLevel.Value);
             PlayerPrefs.SetInt(nameof(IndexSelectKnife), IndexSelectKnife.Value);
             PlayerPrefs.SetString(nameof(OpenedShopItems), string.Join(",", OpenedShopItems.Value));
-        }
-        
-        public void SelectItem(int itemIndex)
-        {
-            IndexSelectKnife.Value = itemIndex;
-            SaveValues();
         }
     }
 }
