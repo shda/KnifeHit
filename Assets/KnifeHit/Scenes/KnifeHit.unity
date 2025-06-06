@@ -603,6 +603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 465265906}
   - component: {fileID: 465265909}
+  - component: {fileID: 465265910}
   - component: {fileID: 465265907}
   m_Layer: 0
   m_Name: Target
@@ -680,6 +681,23 @@ MonoBehaviour:
   child: {fileID: 1923255611}
   skins: {fileID: 11400000, guid: 1d8c7c3d20b5a9c41845776d9ac5fa34, type: 2}
   offset: 2.002
+  hitTargetAnimation: {fileID: 465265910}
+--- !u!114 &465265910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465265905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac707e1b59b4120a8177b2c3c8b06dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitOffset: {x: 0, y: 0.1, z: 0}
+  durationBackToPositon: 5
+  spriteRenderer: {fileID: 1896188374}
+  hitColor: {r: 0.9811321, g: 0.7728729, b: 0.7728729, a: 1}
 --- !u!1 &588251878
 GameObject:
   m_ObjectHideFlags: 0
@@ -2799,8 +2817,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: e21cdae5cbefb194fa02b2ecb87de0ea, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7f1071d3454dac341b3666959598b595, type: 3}
+  m_Color: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -11,7 +11,9 @@ namespace KnifeHit.Scripts
         [SerializeField] private Transform child;
         [SerializeField] private ListSkins skins; 
         [SerializeField] private float offset;
-        
+
+        [SerializeField] private HitTargetAnimation hitTargetAnimation;
+
         public void SetSkin(int index)
         {
             spriteRenderer.sprite = skins.GetWithOverflow(index);
@@ -38,6 +40,15 @@ namespace KnifeHit.Scripts
             {
                 DestroyImmediate(c.gameObject);
             }
+        }
+
+        public void HitToTarget(Knife knife)
+        {
+            knife.IsMoving = false;
+            knife.SetStaticRigidbody2D();
+            knife.transform.SetParent(transform);
+            
+            hitTargetAnimation.PlayAnimation();
         }
     }
 }

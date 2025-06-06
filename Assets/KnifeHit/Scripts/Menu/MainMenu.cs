@@ -14,7 +14,7 @@ namespace KnifeHit.Scripts.Menu
 
         private void Awake()
         {
-            //OnPressButtonHome();
+            OnPressButtonHome();
         }
         
         public void OnPressButtonPlay()

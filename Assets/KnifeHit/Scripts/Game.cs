@@ -104,10 +104,7 @@ namespace KnifeHit.Scripts
             var collisionTarget = collision.gameObject.GetComponent<Target>();
             if (collisionTarget)
             {
-                knife.IsMoving = false;
-                knife.SetStaticRigidbody2D();
-                knife.transform.SetParent(target.transform);
-                
+                collisionTarget.HitToTarget(knife);
                 return;
             }
             
