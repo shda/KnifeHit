@@ -5,7 +5,6 @@ using KnifeHit.Scripts.Bonuses;
 using KnifeHit.Scripts.Lists;
 using KnifeHit.Scripts.LuaLogic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts
 {
@@ -20,11 +19,22 @@ namespace KnifeHit.Scripts
         [SerializeField] private ListKnifes listKnifes;
         
         [SerializeField] private GameStats gameStats;
-        
+
+        private float _knifeSpeed;
         private int _skinIndex;
         private Knife _currentKnife;
         private readonly List<Knife> _usedKnifes = new();
+        
+        public void SetKnifeSpeed(float speed)
+        {
+            _knifeSpeed = speed;
+        }
 
+        public void SetDelayBetweenKnives(float delayBetweenKnifes)
+        {
+            delayNextKnife = delayBetweenKnifes;
+        }
+        
         public void Restart()
         {
             gameStats.LoadValues();
@@ -50,6 +60,7 @@ namespace KnifeHit.Scripts
         {
             _currentKnife = Instantiate(listKnifes.GetWithOverflow(_skinIndex));
             _currentKnife.SwitchCollider(false);
+            _currentKnife.SetVelocity(_knifeSpeed);
 
             _currentKnife.transform.position = startSpawnKnife.position;
 

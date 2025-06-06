@@ -4,6 +4,9 @@ rotations =
 	"o/0/1,5",
 }
 
+level:SetKnifeSpeed(10.0)
+level:SetDelayBetweenKnives(0.1)
+
 level:SetCountUserKnives(6)
 -- установка скина ножа игрока
 -- level:setUserKnifeSkin()

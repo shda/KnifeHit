@@ -28,6 +28,19 @@ namespace KnifeHit.Scripts.LuaLogic
             game.SetCountAllKnives(count , count);
         }
         
+        
+        [LuaMember]
+        public void SetKnifeSpeed(float speed)
+        {
+            game.SetKnifeSpeed(speed);
+        }
+
+        [LuaMember]
+        public void SetDelayBetweenKnives(float delayBetweenKnifes)
+        {
+            game.SetDelayBetweenKnives(delayBetweenKnifes);
+        }
+        
         [LuaMember]
         private void SetBonus(int index, int angle , CancellationToken cancellation)
         {

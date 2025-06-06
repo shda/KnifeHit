@@ -48,5 +48,10 @@ namespace KnifeHit.Scripts
         {
             body.bodyType = RigidbodyType2D.Static;
         }
+
+        public void SetVelocity(float knifeSpeed)
+        {
+            movingSpeed = new Vector2(0, knifeSpeed);
+        }
     }
 }
