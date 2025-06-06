@@ -62,5 +62,10 @@ namespace KnifeHit.Scripts.LuaLogic
         {
             _cancellation?.Cancel();
         }
+
+        public void StopLevel()
+        {
+            _cancellation?.Cancel();
+        }
     }
 }

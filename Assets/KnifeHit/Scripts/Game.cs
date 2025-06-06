@@ -37,7 +37,9 @@ namespace KnifeHit.Scripts
         
         public void Restart()
         {
+            inputHandler.enabled = true;
             gameStats.LoadValues();
+            target.SetDefaultSize();
             
             foreach (var usedKnife in _usedKnifes)
             {
@@ -112,6 +114,7 @@ namespace KnifeHit.Scripts
             if (otherKnife)
             {
                 knife.IsMoving = false;
+                knife.PlayCompleteAnimation();
                 ShowGameOverScreen();
             }
         }
@@ -133,10 +136,32 @@ namespace KnifeHit.Scripts
             }
             else
             {
-                ShowGameOverScreen();
+                inputHandler.enabled = false;
+                
+                /*
+                foreach (var usedKnife in _usedKnifes)
+                {
+                    usedKnife.PlayCompleteAnimation();
+                }
+                */
+
+                DelayedRestart(3);
+                //ShowGameOverScreen();
             }
         }
         
+        
+        private async void DelayedRestart(float delay)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5));
+            
+            luaScriptLoader.StopLevel();
+            target.AnimationEndLevelAsync();
+            
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(delay));
+            Restart();
+        }
 
         private async void DelayedCreateKnife(float delay)
         {

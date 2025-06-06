@@ -164,6 +164,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8275707524291261620, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+      propertyPath: knife
+      value: 
+      objectReference: {fileID: 1349096193101856942}
     - target: {fileID: 8970055718973506592, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
       propertyPath: m_Name
       value: Bonus01
@@ -176,6 +180,17 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 1349096193101856942}
   m_SourcePrefab: {fileID: 100100000, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+--- !u!114 &3986234502605505582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8275707524291261620, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+  m_PrefabInstance: {fileID: 5010477843979530394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176175148224607418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d82bf40353644fd8e535c0685a66939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4176175148224607418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8970055718973506592, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
@@ -193,3 +208,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538e84d7be194799b42281f116eaed58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 6181416497655638260}
+  colliderNew: {fileID: 7047930925783305155}
+  completeLevelAnimation: {fileID: 3986234502605505582}
+--- !u!50 &6181416497655638260 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1170943053076994158, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+  m_PrefabInstance: {fileID: 5010477843979530394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &7047930925783305155 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2614212970427759449, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+  m_PrefabInstance: {fileID: 5010477843979530394}
+  m_PrefabAsset: {fileID: 0}

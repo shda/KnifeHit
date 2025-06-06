@@ -72,9 +72,13 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8275707524291261620, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+      propertyPath: knife
+      value: 
+      objectReference: {fileID: 7298322893027742952}
     - target: {fileID: 8970055718973506592, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
       propertyPath: m_Name
-      value: 1 Variant
+      value: Bonus00
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -84,6 +88,27 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 7298322893027742952}
   m_SourcePrefab: {fileID: 100100000, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+--- !u!60 &87021024491848278 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2614212970427759449, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+  m_PrefabInstance: {fileID: 2698401584093821199}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &3833305938901524833 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1170943053076994158, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+  m_PrefabInstance: {fileID: 2698401584093821199}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6317316437168557499 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8275707524291261620, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
+  m_PrefabInstance: {fileID: 2698401584093821199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417259857029889327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d82bf40353644fd8e535c0685a66939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6417259857029889327 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8970055718973506592, guid: 60a205c13ca9a0e4c85d91ee9a268b87, type: 3}
@@ -101,3 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538e84d7be194799b42281f116eaed58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 3833305938901524833}
+  colliderNew: {fileID: 87021024491848278}
+  completeLevelAnimation: {fileID: 6317316437168557499}

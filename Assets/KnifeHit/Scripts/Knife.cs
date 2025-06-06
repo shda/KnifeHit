@@ -3,16 +3,20 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts
 {
-    public class Knife : MonoBehaviour
+    public class Knife : TargetObject
     {
         [SerializeField] private Vector2 movingSpeed;
-        [SerializeField] private Rigidbody2D body;
-        [SerializeField] private Collider2D colliderNew;
-
+        
         public Action<Knife , Collision2D> OnCollision;
         public Action<Knife , Collider2D> OnTriggerEnter;
-
+        
         public bool IsMoving { get; set; }
+
+        private void OnEnable()
+        {
+            body.gravityScale = 0;
+            IsComplete = false;
+        }
 
         public void KnifeThrow()
         {
@@ -28,8 +32,11 @@ namespace KnifeHit.Scripts
         {
             if (body.bodyType == RigidbodyType2D.Static)
                 return;
-            
-            body.linearVelocity = IsMoving ? movingSpeed : Vector2.zero;
+
+            if (!IsComplete)
+            {
+                body.linearVelocity = IsMoving ? movingSpeed : Vector2.zero;
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D other)

@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using KnifeHit.Scripts.Lists;
 using UnityEngine;
 
@@ -13,10 +15,22 @@ namespace KnifeHit.Scripts
         [SerializeField] private float offset;
 
         [SerializeField] private HitTargetAnimation hitTargetAnimation;
+        
+        private Vector3 _defaultSize;
+
+        private void Awake()
+        {
+            _defaultSize =  transform.localScale;
+        }
 
         public void SetSkin(int index)
         {
             spriteRenderer.sprite = skins.GetWithOverflow(index);
+        }
+
+        public void SetDefaultSize()
+        {
+            transform.localScale = _defaultSize;
         }
         
         public void AddObject(GameObject obj, int angle , float addRotation = 0)
@@ -42,11 +56,22 @@ namespace KnifeHit.Scripts
             }
         }
 
+        public async UniTask AnimationEndLevelAsync()
+        {
+            var children = child.Cast<Transform>().ToArray();
+            foreach (var c in children)
+            {
+                c.GetComponent<TargetObject>()?.PlayCompleteAnimation();
+            }
+
+            transform.DOScale(new Vector3(0, 0, 0), 0.5f);
+        }
+
         public void HitToTarget(Knife knife)
         {
             knife.IsMoving = false;
             knife.SetStaticRigidbody2D();
-            knife.transform.SetParent(transform);
+            knife.transform.SetParent(child);
             
             hitTargetAnimation.PlayAnimation();
         }
