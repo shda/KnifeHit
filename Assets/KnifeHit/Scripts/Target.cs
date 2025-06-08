@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using KnifeHit.Scripts.Lists;
 using UnityEngine;
@@ -61,9 +60,9 @@ namespace KnifeHit.Scripts
         {
             foreach (var addObject in _addObjects)
             {
-                if (addObject != null)
+                if (addObject)
                 {
-                    DestroyImmediate(addObject.gameObject);
+                    addObject.ReturnObjectToPool();
                 }
             }
             
@@ -83,7 +82,7 @@ namespace KnifeHit.Scripts
             transform.DOScale(new Vector3(0, 0, 0), 0.5f);
         }
 
-        public void HitToTarget(Knife knife)
+        public void KnifeHitToTarget(Knife knife)
         {
             knife.IsMoving = false;
             knife.SetStaticRigidbody2D();
@@ -91,6 +90,11 @@ namespace KnifeHit.Scripts
             
             hitTargetAnimation.PlayAnimation();
             
+           // _addObjects.Add(knife);
+        }
+
+        public void AddKnife(Knife knife)
+        {
             _addObjects.Add(knife);
         }
     }

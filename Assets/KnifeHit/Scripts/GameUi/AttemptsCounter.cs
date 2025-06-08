@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BlockBlast.Scripts.Common;
 using TriInspector;
@@ -14,6 +15,8 @@ namespace KnifeHit.Scripts.GameUi
         public void SetCountKnifes(int allCount , int countEnable)
         {
             Debug.Log($"SetCountKnifes {allCount} - {countEnable}");
+            if (countEnable > allCount)
+                countEnable = allCount;
             
             if (_listKnifes.Count != allCount || _listKnifes.Count < countEnable)
             {
@@ -54,13 +57,22 @@ namespace KnifeHit.Scripts.GameUi
             {
                 poolIcons.Release(icon);
             }
+            
+            _listKnifes.Clear();
         }
         
         private void ReturnLastIcons()
         {
             foreach (var knifesIcon in _listKnifes)
             {
-                poolIcons.Release(knifesIcon);
+                try
+                {
+                    poolIcons.Release(knifesIcon);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
             }
             _listKnifes.Clear();
         }

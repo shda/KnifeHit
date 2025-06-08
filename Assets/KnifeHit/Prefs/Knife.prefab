@@ -135,10 +135,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13157b03bce2453b99334fa56abdb354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: {x: 0, y: 10}
   body: {fileID: 5774856162730205868}
   colliderNew: {fileID: 4658948412774825448}
   completeLevelAnimation: {fileID: 5416682688816024451}
+  listKnifeSkins: {fileID: 11400000, guid: 628ea1a1aa45e6a4f9806f0c0cb5ae2d, type: 2}
+  knifeSpriteRenderer: {fileID: 4180834912782360319}
+  movingSpeed: {x: 0, y: 10}
 --- !u!114 &5416682688816024451
 MonoBehaviour:
   m_ObjectHideFlags: 0

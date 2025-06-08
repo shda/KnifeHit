@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac7e44979cb4cae96d7dab44fd26ff6, type: 3}
+  m_Name: ListKnifeSkins
+  m_EditorClassIdentifier: 
+  list:
+  - {fileID: 21300000, guid: 10e4fb8400cf38b41aed3aba7125c68c, type: 3}
+  - {fileID: 21300000, guid: 5086e5324b0b25944a09eaf78808c9a8, type: 3}
+  - {fileID: 21300000, guid: c8ae37d66895dd848aa4fb6aac452ba5, type: 3}
+  - {fileID: 21300000, guid: 28355588baf34e04ba1dda0155ed2f29, type: 3}
+  - {fileID: 21300000, guid: 2cd1a70ee533e49468b87c7a169c2417, type: 3}
+  - {fileID: 21300000, guid: 625a6794a58d6494bac63925b8003293, type: 3}
+  - {fileID: 21300000, guid: af67f1a6af5d5804e8ef0cc21abcc1f0, type: 3}
+  - {fileID: 21300000, guid: 8eb5c76b472c4834795556f1429172bc, type: 3}
+  - {fileID: 21300000, guid: b896f384196bf7e4988d6181bc0e7e87, type: 3}

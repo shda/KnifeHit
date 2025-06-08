@@ -15,7 +15,8 @@ namespace KnifeHit.Scripts.LuaLogic
     {
         [SerializeField] private RotatorHandler rotatorHandler;
         [SerializeField] private ListBonuses listBonuses;
-        [SerializeField] private ListKnifes listKnifes;
+       // [SerializeField] private ListKnifes listKnifes;
+        [SerializeField] private KnifeSpawner listKnifes;
         [SerializeField] private Target target;
         [SerializeField] private Game game;
         
@@ -49,6 +50,11 @@ namespace KnifeHit.Scripts.LuaLogic
 
             Debug.Log("SetBonus");
             var bonus = Object.Instantiate(listBonuses.GetWithOverflow(index));
+            //Todo fixed
+            bonus.OnReturnToPool = o =>
+            {
+                Object.DestroyImmediate(o.gameObject);
+            };
             target.AddObject(bonus, angle);
         }
 
@@ -79,8 +85,9 @@ namespace KnifeHit.Scripts.LuaLogic
                 return;
 
             Debug.Log("SetObstacle");
-            
-            var knife = Object.Instantiate(listKnifes.GetWithOverflow(index));
+
+            var knife = listKnifes.GetKnife(); // Object.Instantiate(listKnifes.GetWithOverflow(index));
+            knife.SetSkinIndex(index);
             knife.IsMoving = false;
             knife.SetStaticRigidbody2D();
 

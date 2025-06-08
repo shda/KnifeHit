@@ -1,10 +1,13 @@
 using System;
+using KnifeHit.Scripts.Lists;
 using UnityEngine;
 
 namespace KnifeHit.Scripts
 {
     public class Knife : TargetObject
     {
+        [SerializeField] private ListSkins listKnifeSkins;
+        [SerializeField] private SpriteRenderer knifeSpriteRenderer;
         [SerializeField] private Vector2 movingSpeed;
         
         public Action<Knife , Collision2D> OnCollision;
@@ -14,8 +17,12 @@ namespace KnifeHit.Scripts
 
         private void OnEnable()
         {
-            body.gravityScale = 0;
-            IsComplete = false;
+            ResetToDefault();
+        }
+
+        public void SetSkinIndex(int index)
+        {
+            knifeSpriteRenderer.sprite = listKnifeSkins.GetWithOverflow(index);
         }
 
         public void KnifeThrow()
@@ -53,10 +60,23 @@ namespace KnifeHit.Scripts
         {
             body.bodyType = RigidbodyType2D.Static;
         }
-
+        
         public void SetVelocity(float knifeSpeed)
         {
             movingSpeed = new Vector2(0, knifeSpeed);
+        }
+
+        public void ResetToDefault()
+        {
+            IsComplete = false;
+            
+            transform.SetParent(null);
+            OnTriggerEnter = null;
+            OnCollision = null;
+            
+            body.gravityScale = 0;
+            body.bodyType = RigidbodyType2D.Dynamic;
+            SwitchCollider(true);
         }
     }
 }

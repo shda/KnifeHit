@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using KnifeHit.Scripts.Bonuses;
-using KnifeHit.Scripts.Lists;
 using KnifeHit.Scripts.LuaLogic;
 using UnityEngine;
 
@@ -13,86 +12,70 @@ namespace KnifeHit.Scripts
     public class Game : MonoBehaviour
     {
         [SerializeField] private float delayNextKnife;
-        [Space]
-        [SerializeField] private InputHandler inputHandler;
-        [SerializeField] private Transform startSpawnKnife;
+
+        [Space] [SerializeField] private InputHandler inputHandler;
         [SerializeField] private Target target;
-        [SerializeField] private GameOverScreen  gameOverScreen;
+        [SerializeField] private GameOverScreen gameOverScreen;
         [SerializeField] private LuaScriptLoader luaScriptLoader;
-        [SerializeField] private ListKnifes listKnifes;
         [SerializeField] private GameStats gameStats;
+        [SerializeField] private KnifeSpawner knifeSpawner;
 
-        private float _knifeSpeed;
-        private int _skinIndex;
-        private Knife _currentKnife;
-        private bool isCompleteGame;
-        private readonly List<Knife> _usedKnifes = new();
-        
+        private bool _isCompleteGame;
         private CancellationTokenSource _tokenSource;
-        
-        public void SetKnifeSpeed(float speed)
+
+        private void Awake()
         {
-            _knifeSpeed = speed;
-            UpdateKnife();
+            knifeSpawner.OnKnifeCollisionToOther = KnifeCollisionToOther;
+            knifeSpawner.OnKnifeTriggerToOther = KnifeTriggerToOther;
         }
 
-        public void SetDelayBetweenKnives(float delayBetweenKnifes)
-        {
-            delayNextKnife = delayBetweenKnifes;
-        }
-        
-        public void ResetLevelToDefault()
-        {
-            _tokenSource?.Cancel();
-            _tokenSource = new CancellationTokenSource();
-            
-            inputHandler.enabled = true;
-            
-            gameStats.LoadValues();
-            target.SetDefaultSize();
-            
-            foreach (var usedKnife in _usedKnifes.Where(usedKnife => usedKnife))
-            {
-                DestroyImmediate(usedKnife.gameObject);
-            }
-
-            SetKnifeSkin(gameStats.IndexSelectKnife.Value);
-            
-            gameOverScreen.Hide();
-            target.RemoveOldObjects();
-            luaScriptLoader.StartLevel();
-
-            isCompleteGame = false;
-        }
-        
         private void Start()
         {
             inputHandler.OnClick = OnClick;
             ResetLevelToDefault();
         }
 
-        private void PrepareNewKnife()
+        public void SetKnifeSpeed(float speed)
         {
-            _currentKnife = Instantiate(listKnifes.GetWithOverflow(_skinIndex));
-            _currentKnife.SwitchCollider(false);
-            _currentKnife.SetVelocity(_knifeSpeed);
-            _currentKnife.transform.position = startSpawnKnife.position;
-            _currentKnife.OnCollision = KnifeCollisionToOther;
-            _currentKnife.OnTriggerEnter = KnifeTriggerToOther;
+            knifeSpawner.KnifeSpeed = speed;
+        }
+
+        public void SetDelayBetweenKnives(float delayBetweenKnifes)
+        {
+            delayNextKnife = delayBetweenKnifes;
+        }
+
+        public void ResetLevelToDefault()
+        {
+            _tokenSource?.Cancel();
+            _tokenSource = new CancellationTokenSource();
+            
+            knifeSpawner.RemoveCurrentKnife();
+            target.RemoveOldObjects();
+
+            inputHandler.enabled = true;
+
+            gameStats.LoadValues();
+            target.SetDefaultSize();
+            SetKnifeSkin(gameStats.IndexSelectKnife.Value);
+            gameOverScreen.Hide();
+            luaScriptLoader.StartLevel();
+
+            _isCompleteGame = false;
         }
 
         private void ShowGameOverScreen()
         {
             gameStats.CountCurrentBonuses.Value = 0;
             gameStats.SaveValues();
-            
+
             gameOverScreen.OnRestartGame = ResetLevelToDefault;
             gameOverScreen.Show();
         }
 
-        private void KnifeTriggerToOther(Knife knife , Collider2D coll)
+        private void KnifeTriggerToOther(Knife knife, Collider2D coll)
         {
-            var bonus = coll.GetComponent<BonusBase>();
+            var bonus = coll.GetComponent<Bonus>();
             if (bonus)
             {
                 AddBonus();
@@ -110,18 +93,18 @@ namespace KnifeHit.Scripts
             }
         }
 
-        private void KnifeCollisionToOther(Knife knife , Collision2D collision)
+        private void KnifeCollisionToOther(Knife knife, Collision2D collision)
         {
             var collisionTarget = collision.gameObject.GetComponent<Target>();
             if (collisionTarget)
             {
-                collisionTarget.HitToTarget(knife);
+                collisionTarget.KnifeHitToTarget(knife);
                 if (gameStats.CountUserKnives.Value <= 0)
                 {
                     OnceCompleteGame(false);
                 }
             }
-            
+
             var otherKnife = collision.gameObject.GetComponent<Knife>();
             if (otherKnife)
             {
@@ -133,23 +116,23 @@ namespace KnifeHit.Scripts
 
         private void OnceCompleteGame(bool isGameOver)
         {
-            if (isCompleteGame)
+            if (_isCompleteGame)
                 return;
-            
+
             Debug.Log($"OnceCompleteGame {isGameOver}");
-            
-            isCompleteGame = true;
-            
+
+            _isCompleteGame = true;
+
             if (isGameOver)
             {
                 DelayShowGameOverScreen();
             }
             else
             {
-                DelayedRestart(2 ,_tokenSource.Token);
+                DelayedRestart(2, _tokenSource.Token);
             }
         }
-        
+
         private async void DelayShowGameOverScreen()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1));
@@ -158,68 +141,53 @@ namespace KnifeHit.Scripts
 
         private void OnClick()
         {
-            if(isCompleteGame)
+            if (_isCompleteGame)
                 return;
-            
+
             inputHandler.enabled = false;
-            
-            if (_currentKnife)
-            {
-                _currentKnife.SwitchCollider(true);
-                _currentKnife.KnifeThrow();
-                _usedKnifes.Add(_currentKnife);
-                _currentKnife = null;
-            }
-            
+            var knife = knifeSpawner.ThrowKnife();
+            target.AddKnife(knife);
+
             gameStats.CountUserKnives.Value--;
             if (gameStats.CountUserKnives.Value > 0)
             {
-                DelayedCreateKnife(delayNextKnife , _tokenSource.Token);
+                DelayedCreateKnife(delayNextKnife, _tokenSource.Token);
             }
         }
-        
-        private async void DelayedRestart(float delay , CancellationToken token)
+
+        private async void DelayedRestart(float delay, CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.5), cancellationToken: token);
-            if(token.IsCancellationRequested)
+            if (token.IsCancellationRequested)
                 return;
-            
-            luaScriptLoader.StopLevel(); 
+
+            luaScriptLoader.StopLevel();
             target.AnimationEndLevelAsync();
-            
+
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
-            if(token.IsCancellationRequested)
+            if (token.IsCancellationRequested)
                 return;
-            
+
             ResetLevelToDefault();
         }
 
-        private async void DelayedCreateKnife(float delay , CancellationToken token)
+        private async void DelayedCreateKnife(float delay, CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: token);
-            if(token.IsCancellationRequested)
+            if (token.IsCancellationRequested)
                 return;
-            
-            PrepareNewKnife();
+
+            knifeSpawner.PrepareNewKnife();
             inputHandler.enabled = true;
         }
 
         public void SetKnifeSkin(int skinIndex)
         {
-            _skinIndex = skinIndex;
-            UpdateKnife();
+            knifeSpawner.SkinIndex = skinIndex;
+            knifeSpawner.UpdateKnife();
         }
 
-        private void UpdateKnife()
-        {
-            if (_currentKnife)
-            {
-                DestroyImmediate(_currentKnife.gameObject);
-            }
-            PrepareNewKnife();
-        }
-        
-        public void SetCountAllKnives(int all , int current)
+        public void SetCountAllKnives(int all, int current)
         {
             gameStats.CountAllUserKnives.SetValueAndForceNotify(all);
             gameStats.CountUserKnives.SetValueAndForceNotify(current);

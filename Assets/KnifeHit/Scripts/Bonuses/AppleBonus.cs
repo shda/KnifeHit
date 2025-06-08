@@ -1,6 +1,6 @@
 namespace KnifeHit.Scripts.Bonuses
 {
-    public class AppleBonus : BonusBase
+    public class AppleBonus : Bonus
     {
         
     }

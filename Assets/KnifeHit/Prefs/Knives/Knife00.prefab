@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: movingSpeed.y
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 5545563243070605098, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
+      propertyPath: listKnifeSkins
+      value: 
+      objectReference: {fileID: 11400000, guid: 628ea1a1aa45e6a4f9806f0c0cb5ae2d, type: 2}
+    - target: {fileID: 5545563243070605098, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
+      propertyPath: knifeSpriteRenderer
+      value: 
+      objectReference: {fileID: 9061255813602111547}
     - target: {fileID: 8010214772942058125, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
       propertyPath: m_Name
       value: Knife00
@@ -65,3 +73,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
+--- !u!212 &9061255813602111547 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4180834912782360319, guid: 1df25438da1a4af42b65f51acb1496f3, type: 3}
+  m_PrefabInstance: {fileID: 5171613503039205060}
+  m_PrefabAsset: {fileID: 0}

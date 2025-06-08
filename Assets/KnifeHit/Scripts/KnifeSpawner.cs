@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using BlockBlast.Scripts.Common;
+using UnityEngine;
+
+namespace KnifeHit.Scripts
+{
+    public class KnifeSpawner : MonoBehaviour
+    {
+        [SerializeField] private Transform startSpawnKnife;
+        [SerializeField] private PoolGameObjectsComponent<Knife> knifes;
+
+        private int _skinIndex;
+        private float _knifeSpeed;
+
+        public int SkinIndex
+        {
+            get => _skinIndex;
+            set
+            {
+                _skinIndex = value;
+                UpdateKnife();
+            }
+        }
+
+        public float KnifeSpeed
+        {
+            get => _knifeSpeed;
+            set
+            {
+                _knifeSpeed = value;
+                UpdateKnife();
+            }
+        }
+
+        private Knife _currentKnife;
+       // private readonly List<Knife> _spawnedKnifes = new();
+
+        public Action<Knife, Collision2D> OnKnifeCollisionToOther;
+        public Action<Knife, Collider2D> OnKnifeTriggerToOther;
+
+        private void Awake()
+        {
+            knifes.Init();
+        }
+
+        public void PrepareNewKnife()
+        {
+            _currentKnife = GetKnife();
+            _currentKnife.SetSkinIndex(SkinIndex);
+            _currentKnife.SwitchCollider(false);
+            _currentKnife.SetVelocity(KnifeSpeed);
+            _currentKnife.transform.rotation = Quaternion.identity;
+            _currentKnife.transform.position = startSpawnKnife.position;
+            _currentKnife.OnCollision = (knife, coll) => OnKnifeCollisionToOther.Invoke(knife, coll);
+            _currentKnife.OnTriggerEnter = (knife, coll) => OnKnifeTriggerToOther?.Invoke(knife, coll);
+        }
+
+        public Knife GetKnife()
+        {
+            var knife = knifes.Get();
+            knife.OnReturnToPool = OnReturnToPool;
+            knife.ResetToDefault();
+            
+            return knife;
+        }
+        
+        private void OnReturnToPool(TargetObject obj)
+        {
+            knifes.Release(obj as Knife);
+        }
+
+        public Knife ThrowKnife()
+        {
+            if (!_currentKnife) 
+                return null;
+
+            var knife = _currentKnife;
+            _currentKnife = null;
+            
+            knife.SwitchCollider(true);
+            knife.KnifeThrow();
+            return knife;
+        }
+
+        public void UpdateKnife()
+        {
+            if (_currentKnife)
+            { 
+                knifes.Release(_currentKnife);
+            }
+            //RemoveCurrentKnife();
+            PrepareNewKnife();
+        }
+        
+        public void RemoveCurrentKnife()
+        {
+            if (_currentKnife)
+            { 
+                knifes.Release(_currentKnife);
+            }
+            _currentKnife = null;
+        }
+    }
+}
