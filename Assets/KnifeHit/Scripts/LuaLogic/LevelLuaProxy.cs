@@ -15,7 +15,6 @@ namespace KnifeHit.Scripts.LuaLogic
     {
         [SerializeField] private RotatorHandler rotatorHandler;
         [SerializeField] private ListBonuses listBonuses;
-       // [SerializeField] private ListKnifes listKnifes;
         [SerializeField] private KnifeSpawner listKnifes;
         [SerializeField] private Target target;
         [SerializeField] private Game game;

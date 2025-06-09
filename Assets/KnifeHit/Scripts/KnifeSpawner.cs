@@ -20,7 +20,7 @@ namespace KnifeHit.Scripts
             set
             {
                 _skinIndex = value;
-                UpdateKnife();
+                UpdateCurrentKnife();
             }
         }
 
@@ -30,7 +30,7 @@ namespace KnifeHit.Scripts
             set
             {
                 _knifeSpeed = value;
-                UpdateKnife();
+                UpdateCurrentKnife();
             }
         }
 
@@ -48,6 +48,13 @@ namespace KnifeHit.Scripts
         public void PrepareNewKnife()
         {
             _currentKnife = GetKnife();
+            UpdateCurrentKnife();
+        }
+
+        public void UpdateCurrentKnife()
+        {
+            if(!_currentKnife)
+                PrepareNewKnife();
             _currentKnife.SetSkinIndex(SkinIndex);
             _currentKnife.SwitchCollider(false);
             _currentKnife.SetVelocity(KnifeSpeed);
@@ -83,24 +90,13 @@ namespace KnifeHit.Scripts
             knife.KnifeThrow();
             return knife;
         }
-
-        public void UpdateKnife()
-        {
-            if (_currentKnife)
-            { 
-                knifes.Release(_currentKnife);
-            }
-            //RemoveCurrentKnife();
-            PrepareNewKnife();
-        }
         
-        public void RemoveCurrentKnife()
+        public void CreateNewKnife()
         {
-            if (_currentKnife)
-            { 
-                knifes.Release(_currentKnife);
+            if (!_currentKnife)
+            {
+                PrepareNewKnife();
             }
-            _currentKnife = null;
         }
     }
 }

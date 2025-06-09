@@ -13,7 +13,7 @@ namespace KnifeHit.Scripts.GameUi
         private void Awake()
         {
             gameStats.LoadValues();
-            gameStats.CountTopBonuses.Subscribe(i =>
+            gameStats.CountCurrentBonuses.Subscribe(i =>
             {
                 countTopBonuses.text = i.ToString();
             }).AddTo(this);

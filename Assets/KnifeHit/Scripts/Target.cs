@@ -17,7 +17,7 @@ namespace KnifeHit.Scripts
         
         private Vector3 _defaultSize;
         
-        private readonly List<TargetObject> _addObjects = new();
+        private readonly HashSet<TargetObject> _objectsInScene = new();
 
         private void Awake()
         {
@@ -53,12 +53,12 @@ namespace KnifeHit.Scripts
             //Return rotation
             obj.transform.rotation = Quaternion.Euler(0,0,  obj.transform.eulerAngles.z + 180 + addRotation);
             
-            _addObjects.Add(obj);
+            _objectsInScene.Add(obj);
         }
         
         public void RemoveOldObjects()
         {
-            foreach (var addObject in _addObjects)
+            foreach (var addObject in _objectsInScene)
             {
                 if (addObject)
                 {
@@ -66,12 +66,12 @@ namespace KnifeHit.Scripts
                 }
             }
             
-            _addObjects.Clear();
+            _objectsInScene.Clear();
         }
         
         public void AnimationEndLevelAsync()
         {
-            foreach (var obj in _addObjects)
+            foreach (var obj in _objectsInScene)
             {
                 if (obj)
                 {
@@ -89,13 +89,11 @@ namespace KnifeHit.Scripts
             knife.transform.SetParent(child);
             
             hitTargetAnimation.PlayAnimation();
-            
-           // _addObjects.Add(knife);
         }
 
-        public void AddKnife(Knife knife)
+        public void AddKnifeToListObjects(Knife knife)
         {
-            _addObjects.Add(knife);
+            _objectsInScene.Add(knife);
         }
     }
 }

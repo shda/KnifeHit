@@ -37,7 +37,7 @@ MonoBehaviour:
     alwaysOpen: 0
     buyPrice: 15
     needOpenLevel: -1
-  - knifeSprite: {fileID: 21300000, guid: a213e99a3f0b07a408d197ea3b8ab263, type: 3}
+  - knifeSprite: {fileID: 21300000, guid: d1f3b8e3068f56645b7cc12e7cbeb48a, type: 3}
     shadowKnifeSprite: {fileID: 21300000, guid: e9bf5d0c3d9c8be47be2cd554a17ca96, type: 3}
     indexImage: 4
     alwaysOpen: 0

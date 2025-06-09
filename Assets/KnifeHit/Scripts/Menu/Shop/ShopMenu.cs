@@ -54,7 +54,7 @@ namespace KnifeHit.Scripts.Menu.Shop
                     priceBuy.SetValue(price);
                     buttonBuy.gameObject.SetActive(true);
 
-                    buttonBuy.interactable = price <= gameStats.CountTopBonuses.Value;
+                    buttonBuy.interactable = price <= gameStats.CountCurrentBonuses.Value;
                 }
             }
         }

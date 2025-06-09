@@ -1,7 +1,6 @@
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace KnifeHit.Scripts.GameUi
 {
@@ -9,14 +8,14 @@ namespace KnifeHit.Scripts.GameUi
     {
         [SerializeField] private AttemptsCounter attemptsCounter;
         [SerializeField] private GameStats gameStats;
-        [SerializeField] private TextMeshProUGUI countCurrentBonuses;
+        [SerializeField] private TextMeshProUGUI numberLevel;
 
         private void Awake()
         {
-            gameStats.CountCurrentBonuses.Subscribe(i =>
+            gameStats.CurrentLevel.Subscribe(i =>
             {
-                countCurrentBonuses.text = i.ToString();
-            }).AddTo(this);;
+                numberLevel.text = i.ToString();
+            }).AddTo(this);
             
             gameStats.CountUserKnives.Subscribe(OnChangeCountUserKnives).AddTo(this);
             gameStats.CountAllUserKnives.Subscribe(OnChangeCountUserKnives).AddTo(this);

@@ -7,8 +7,8 @@ namespace KnifeHit.Scripts
     [CreateAssetMenu(menuName = "Create GameStats", fileName = "GameStats", order = 0)]
     public class GameStats : ScriptableObject
     {
-        public IntReactiveProperty CountTopBonuses { get;set; } = new();
         public IntReactiveProperty CountCurrentBonuses { get;set; } = new();
+        public IntReactiveProperty CurrentLevel { get;set; } = new();
         public IntReactiveProperty CountUserKnives { get;set; } = new();
         public IntReactiveProperty CountAllUserKnives { get;set; } = new();
         public IntReactiveProperty LastOpenedLevel { get;set; } = new();
@@ -36,7 +36,7 @@ namespace KnifeHit.Scripts
         
         public void LoadValues()
         {
-            CountTopBonuses.Value = PlayerPrefs.GetInt(nameof(CountTopBonuses));
+            CountCurrentBonuses.Value = PlayerPrefs.GetInt(nameof(CountCurrentBonuses));
             LastOpenedLevel.Value = PlayerPrefs.GetInt(nameof(LastOpenedLevel));
             IndexSelectKnife.Value = PlayerPrefs.GetInt(nameof(IndexSelectKnife));
             
@@ -45,9 +45,10 @@ namespace KnifeHit.Scripts
 
         public void SaveValues()
         {
-            PlayerPrefs.SetInt(nameof(CountTopBonuses), CountTopBonuses.Value);
+            PlayerPrefs.SetInt(nameof(CountCurrentBonuses), CountCurrentBonuses.Value);
             PlayerPrefs.SetInt(nameof(LastOpenedLevel), LastOpenedLevel.Value);
             PlayerPrefs.SetInt(nameof(IndexSelectKnife), IndexSelectKnife.Value);
+            
             PlayerPrefs.SetString(nameof(OpenedShopItems), string.Join(",", OpenedShopItems.Value));
         }
     }

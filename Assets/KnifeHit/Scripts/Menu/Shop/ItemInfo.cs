@@ -26,6 +26,11 @@ namespace KnifeHit.Scripts.Menu.Shop
             if (gameStats.OpenedShopItems.Value.Contains(indexImage))
                 return true;
             
+            if (needOpenLevel != -1)
+            {
+                return gameStats.LastOpenedLevel.Value >= needOpenLevel;
+            }
+            
             return false;
         }
 
@@ -33,12 +38,7 @@ namespace KnifeHit.Scripts.Menu.Shop
         {
             if (buyPrice != -1)
             {
-                return gameStats.CountTopBonuses.Value >= buyPrice;
-            }
-
-            if (needOpenLevel != -1)
-            {
-                return gameStats.LastOpenedLevel.Value > needOpenLevel;
+                return gameStats.CountCurrentBonuses.Value >= buyPrice;
             }
             
             return false;
@@ -83,9 +83,9 @@ namespace KnifeHit.Scripts.Menu.Shop
         {
             if(buyPrice != -1)
             {
-                if (gameStats.CountTopBonuses.Value >= buyPrice)
+                if (gameStats.CountCurrentBonuses.Value >= buyPrice)
                 {
-                    gameStats.CountTopBonuses.Value -= buyPrice;
+                    gameStats.CountCurrentBonuses.Value -= buyPrice;
                     BuyItem(gameStats);
                     return true;
                 }

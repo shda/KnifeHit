@@ -6,6 +6,12 @@ namespace KnifeHit.Scripts
     public class GameOverScreen : MonoBehaviour
     {
         public Action OnRestartGame;
+        public Action OnQuitGame;
+
+        public void OnPressOnQuitGame()
+        {
+            OnQuitGame?.Invoke();
+        }
         
         public void OnPressRestart()
         {
