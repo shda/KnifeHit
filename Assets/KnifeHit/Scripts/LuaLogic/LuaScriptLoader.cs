@@ -1,9 +1,7 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using KnifeHit.Scripts.Levels;
-using KnifeHit.Scripts.Lists;
 using Lua;
 using Lua.Unity;
 using UnityEngine;
