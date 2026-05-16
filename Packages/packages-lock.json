@@ -32,13 +32,6 @@
       "dependencies": {},
       "hash": "f213ff497e4ff462a77319cf677cf20cc0860ca9"
     },
-    "com.cysharp.zlinq": {
-      "version": "https://github.com/Cysharp/ZLinq.git?path=src/ZLinq.Unity/Assets/ZLinq.Unity",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "d94b0a513fed5aa5ac189a10135ab0f4d49ffeba"
-    },
     "com.eflatun.scenereference": {
       "version": "git+https://github.com/starikcetin/Eflatun.SceneReference.git#4.0.0",
       "depth": 0,
@@ -77,6 +70,13 @@
       "dependencies": {},
       "hash": "710e074d16ed1c7f2fefa7f8e7912a05ecf25969"
     },
+    "com.svermeulen.extenject": {
+      "version": "https://github.com/svermeulen/Extenject.git?path=/UnityProject/Assets/Plugins/Zenject",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "31f06cf81043f04301b1072ec81922b64149ea34"
+    },
     "com.tayx.graphy": {
       "version": "https://github.com/Tayx94/graphy.git",
       "depth": 0,
@@ -85,11 +85,11 @@
       "hash": "1cdf31613ea294970560f0bbb2ee2d1f0cd16a22"
     },
     "com.unity.2d.animation": {
-      "version": "14.0.3",
+      "version": "14.0.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.common": "13.0.1",
+        "com.unity.2d.common": "13.0.2",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.collections": "2.4.3",
         "com.unity.modules.animation": "1.0.0",
@@ -98,11 +98,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.aseprite": {
-      "version": "4.0.1",
+      "version": "4.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.common": "13.0.1",
+        "com.unity.2d.common": "13.0.2",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.mathematics": "1.2.6",
@@ -135,11 +135,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.psdimporter": {
-      "version": "13.0.2",
+      "version": "13.0.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.common": "13.0.1",
+        "com.unity.2d.common": "13.0.2",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.2d.tilemap": "1.0.0"
       },
@@ -248,19 +248,19 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.2d.animation": "14.0.3",
+        "com.unity.2d.animation": "14.0.4",
         "com.unity.2d.pixel-perfect": "5.1.1",
-        "com.unity.2d.psdimporter": "13.0.2",
+        "com.unity.2d.psdimporter": "13.0.3",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.2d.spriteshape": "14.0.1",
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.2d.tilemap.extras": "7.0.1",
-        "com.unity.2d.aseprite": "4.0.1",
+        "com.unity.2d.aseprite": "4.0.2",
         "com.unity.2d.tooling": "2.0.2"
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.39",
+      "version": "3.0.40",
       "depth": 0,
       "source": "registry",
       "dependencies": {

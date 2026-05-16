@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attemptsCounter: {fileID: 1318297907}
+  gameStats: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
   numberLevel: {fileID: 1844617513}
 --- !u!114 &75734023
 MonoBehaviour:
@@ -398,7 +399,9 @@ GameObject:
   m_Component:
   - component: {fileID: 318523548}
   - component: {fileID: 318523549}
-  - component: {fileID: 318523553}
+  - component: {fileID: 318523550}
+  - component: {fileID: 318523551}
+  - component: {fileID: 318523552}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -421,6 +424,7 @@ Transform:
   m_Children:
   - {fileID: 465265906}
   - {fileID: 1735187981}
+  - {fileID: 1516571880}
   - {fileID: 601415173}
   - {fileID: 1416660218}
   - {fileID: 7284364788331370672}
@@ -441,11 +445,25 @@ MonoBehaviour:
   delayNextKnife: 0.1
   target: {fileID: 465265909}
   gameOverScreen: {fileID: 75734023}
+  luaScriptLoader: {fileID: 318523552}
+  gameStats: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
   knifeSpawner: {fileID: 1735187983}
   mainMenuScene:
     asset: {fileID: 102900000, guid: f526deb6cf501414e8ca7f767b036004, type: 3}
     guid: f526deb6cf501414e8ca7f767b036004
---- !u!114 &318523553
+--- !u!114 &318523550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318523547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332f58a06bf2e5a44b422029af73fef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &318523551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,6 +476,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 465265906}
+--- !u!114 &318523552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318523547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b63e6d35da922b40824956e0a025af8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luaAsset: {fileID: -6979533126094156877, guid: df46e30908388944eaf5ce48468d980e, type: 3}
+  levelLuaProxy:
+    rotatorHandler: {fileID: 318523551}
+    listBonuses: {fileID: 11400000, guid: 7d0e112e962b8d1438f985a64716b4c9, type: 2}
+    listKnifes: {fileID: 1735187983}
+    target: {fileID: 465265909}
 --- !u!1 &465265905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8813fe0e9ee9fbab41439f6ce50a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: KnifeHit.Game::KnifeHit.Scripts.GameInstaller
-  gameSettings: {fileID: 11400000, guid: 58a7cb3f0eb52f933a49f8d9d6058372, type: 2}
 --- !u!1 &1178548215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1855,7 @@ GameObject:
   - component: {fileID: 1516571880}
   - component: {fileID: 1516571882}
   m_Layer: 0
-  m_Name: LevelEditor
+  m_Name: LevelMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1834,13 +1869,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516571879}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1877058977}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 318523548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1516571882
 MonoBehaviour:
@@ -3565,10 +3600,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TopCountBonuses
       objectReference: {fileID: 0}
-    - target: {fileID: 4104101180392997153, guid: 77fa7bf68c680af45bbf817cc936711b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7451840800753190939, guid: 77fa7bf68c680af45bbf817cc936711b, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -3983,6 +4014,5 @@ SceneRoots:
   - {fileID: 1140211172}
   - {fileID: 588251881}
   - {fileID: 318523548}
-  - {fileID: 1516571880}
   - {fileID: 1241845960}
   - {fileID: 1505928583}

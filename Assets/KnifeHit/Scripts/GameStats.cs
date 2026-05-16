@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using System.Threading;
 using UniRx;
 using UnityEngine;
 
 namespace KnifeHit.Scripts
 {
-    [CreateAssetMenu(menuName = "Create GameStats", fileName = "GameStats", order = 0)]
-    public class GameStats : ScriptableObject
+    public class GameStats
     {
         public IntReactiveProperty CountCurrentBonuses { get;set; } = new();
         public IntReactiveProperty CurrentLevel { get;set; } = new();
@@ -14,6 +14,25 @@ namespace KnifeHit.Scripts
         public IntReactiveProperty LastOpenedLevel { get;set; } = new();
         public ReactiveProperty<HashSet<int>> OpenedShopItems { get;set; } = new();
         public IntReactiveProperty IndexSelectKnife { get;set; } = new();
+        
+        public BoolReactiveProperty IsGameOver { get; set; } = new();
+        
+        public BoolReactiveProperty IsCompletedGame { get; set; } = new();
+        
+        public CancellationTokenSource TokenSource { get; private set; } = new();
+
+        public void Initialize()
+        {
+            TokenSource?.Cancel();
+            TokenSource = new CancellationTokenSource();
+        }
+        
+        public void Dispose()
+        {
+            TokenSource?.Cancel();
+            TokenSource?.Dispose();
+            TokenSource = null;
+        }
         
         private void ParsingBoughtItems()
         {
@@ -49,7 +68,7 @@ namespace KnifeHit.Scripts
             PlayerPrefs.SetInt(nameof(LastOpenedLevel), LastOpenedLevel.Value);
             PlayerPrefs.SetInt(nameof(IndexSelectKnife), IndexSelectKnife.Value);
             
-            PlayerPrefs.SetString(nameof(OpenedShopItems), string.Join(",", OpenedShopItems.Value));
+          //  PlayerPrefs.SetString(nameof(OpenedShopItems), string.Join(",", OpenedShopItems.Value));
         }
     }
 }

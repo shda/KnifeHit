@@ -5,6 +5,7 @@ using KnifeHit.Scripts.Levels;
 using KnifeHit.Scripts.Lists;
 using Lua;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace KnifeHit.Scripts.LuaLogic
@@ -13,32 +14,33 @@ namespace KnifeHit.Scripts.LuaLogic
     [LuaObject]
     public partial class LevelLuaProxy
     {
-        [SerializeField] private RotatorHandler rotatorHandler;
-        [SerializeField] private ListBonuses listBonuses;
-        [SerializeField] private KnifeSpawner listKnifes;
-        [SerializeField] private Target target;
-        [SerializeField] private Game game;
+        [Inject] private RotatorHandler rotatorHandler;
+        [Inject] private ListBonuses listBonuses;
+        [Inject] private KnifeSpawner listKnifes;
+        [Inject] private Target target;
+        [Inject] private GameStats gameStats;
         
         [LuaMember]
         private void SetCountUserKnives(int count, CancellationToken cancellation)
         {
             if (cancellation.IsCancellationRequested)
                 return;
-
-            game.SetCountAllKnives(count , count);
+            
+            gameStats.CountAllUserKnives.SetValueAndForceNotify(count);
+            gameStats.CountUserKnives.SetValueAndForceNotify(count);
         }
         
         
         [LuaMember]
         public void SetKnifeSpeed(float speed)
         {
-            game.SetKnifeSpeed(speed);
+            listKnifes.KnifeSpeed = speed;
         }
 
         [LuaMember]
         public void SetDelayBetweenKnives(float delayBetweenKnifes)
         {
-            game.SetDelayBetweenKnives(delayBetweenKnifes);
+            //game.SetDelayBetweenKnives(delayBetweenKnifes);
         }
         
         [LuaMember]
@@ -74,7 +76,8 @@ namespace KnifeHit.Scripts.LuaLogic
                 return;
             
             Debug.Log("SetUserKnifeSkin");
-            game.SetKnifeSkin(skinIndex);
+            listKnifes.SkinIndex = skinIndex;
+           // game.SetKnifeSkin(skinIndex);
         }
    
         [LuaMember]

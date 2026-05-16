@@ -13,7 +13,8 @@ namespace KnifeHit.Scripts
     {
         [SerializeField] private float delayNextKnife;
 
-        [Space] [SerializeField] private InputHandler inputHandler;
+        [Space] [SerializeField] 
+        private InputHandler inputHandler;
         [SerializeField] private Target target;
         [SerializeField] private GameOverScreen gameOverScreen;
         [SerializeField] private LuaScriptLoader luaScriptLoader;
@@ -25,6 +26,7 @@ namespace KnifeHit.Scripts
         private bool _isGameOver;
         private CancellationTokenSource _tokenSource;
 
+        
         private void Awake()
         {
             knifeSpawner.OnKnifeCollisionToOther = KnifeCollisionToOther;
@@ -65,7 +67,7 @@ namespace KnifeHit.Scripts
             
             knifeSpawner.UpdateCurrentKnife();
             target.RemoveOldObjects();
-            inputHandler.enabled = true;
+           // inputHandler.enabled = true;
 
             gameStats.LoadValues();
             target.SetDefaultSize();
@@ -82,10 +84,7 @@ namespace KnifeHit.Scripts
         {
             gameStats.SaveValues();
 
-            gameOverScreen.OnRestartGame = () =>
-            {
-                ResetLevelToDefault();
-            };
+            gameOverScreen.OnRestartGame = ResetLevelToDefault;
             gameOverScreen.OnQuitGame = QuitGame;
             gameOverScreen.Show();
         }
@@ -177,7 +176,7 @@ namespace KnifeHit.Scripts
             if (_isCompleteGame)
                 return;
 
-            inputHandler.enabled = false;
+           // inputHandler.enabled = false;
             var newKnife = knifeSpawner.ThrowKnife();
             target.AddKnifeToListObjects(newKnife);
 
@@ -197,7 +196,7 @@ namespace KnifeHit.Scripts
                 return;
 
             knifeSpawner.PrepareNewKnife();
-            inputHandler.enabled = true;
+            //inputHandler.enabled = true;
         }
 
         public void SetKnifeSkin(int skinIndex)
@@ -215,5 +214,6 @@ namespace KnifeHit.Scripts
         {
             _tokenSource?.Cancel();
         }
+        
     }
 }

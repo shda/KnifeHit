@@ -8,15 +8,20 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.LuaLogic
 {
-    public class LuaScriptLoader : MonoBehaviour
+    public class LuaScriptLoader 
     {
-        [SerializeField] private LuaAsset luaAsset;
-        [SerializeField] private LevelLuaProxy  levelLuaProxy;
-
+        private LevelLuaProxy  _LevelLuaProxy;
         private LuaState _luaState;
 
         private CancellationTokenSource _cancellation;
+        private readonly GameSettings _gameSettings;
 
+        public LuaScriptLoader(GameSettings gameSettings , LevelLuaProxy  levelLuaProxy)
+        {
+            _gameSettings = gameSettings;
+            _LevelLuaProxy = levelLuaProxy;
+        }
+        
         public void StartLevel()
         {
             _cancellation?.Cancel();
@@ -30,8 +35,8 @@ namespace KnifeHit.Scripts.LuaLogic
             }
             else
             {
-                LoadLevelFromLuaLogic(luaAsset.Text , _cancellation.Token);
-                PlayerPrefs.SetString(LevelEditorController.NameSave, luaAsset.Text);
+                LoadLevelFromLuaLogic(_gameSettings.LuaAsset.Text , _cancellation.Token);
+                PlayerPrefs.SetString(LevelEditorController.NameSave, _gameSettings.LuaAsset.Text);
             }
         }
 
@@ -43,7 +48,7 @@ namespace KnifeHit.Scripts.LuaLogic
             {
                 _luaState = LuaState.Create();
 
-                _luaState.Environment["level"] = levelLuaProxy;
+                _luaState.Environment["level"] = _LevelLuaProxy;
                 await _luaState.DoStringAsync(luaCode, cancellationToken: token);
             }
             catch (LuaCanceledException luaCanceled)

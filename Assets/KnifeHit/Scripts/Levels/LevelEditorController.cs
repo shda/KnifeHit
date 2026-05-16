@@ -8,7 +8,7 @@ namespace KnifeHit.Scripts.Levels
     {
         [SerializeField] private LuaCodeEditor inputField;
         [SerializeField] private GameObject editor;
-        [SerializeField] private Game game;
+      //  [SerializeField] private Game game;
 
         public static string NameSave = "Editor7";
         public void OnPressButtonOpenEditor()
@@ -36,7 +36,7 @@ namespace KnifeHit.Scripts.Levels
         public void Restart()
         {
             PlayerPrefs.SetString(NameSave, inputField.text);
-            game.ResetLevelToDefault();
+          //  game.ResetLevelToDefault();
         }
 
         public void Convert()
