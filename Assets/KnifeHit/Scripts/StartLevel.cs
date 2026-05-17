@@ -3,7 +3,7 @@ using KnifeHit.Scripts.LuaLogic;
 
 namespace KnifeHit.Scripts
 {
-    public class GameBootstrap : IDisposable
+    public class StartLevel : IDisposable
     {
         private readonly GameStats _gameStats;
         private readonly Target _target;
@@ -12,7 +12,7 @@ namespace KnifeHit.Scripts
         private readonly KnifeSpawner _knifeSpawner;
         private readonly InputHandler _inputHandler;
         
-        public GameBootstrap(
+        public StartLevel(
             GameStats gameStats,  
             Target target, 
             KnifeSpawner knifeSpawner,
@@ -36,6 +36,19 @@ namespace KnifeHit.Scripts
         
         public void ResetLevelToDefault()
         {
+            InitGameStats();
+
+            _knifeSpawner.UpdateCurrentKnife();
+            _target.RemoveOldObjects();
+            _inputHandler.IsEnable = true;
+            
+            _target.SetDefaultSize();
+            
+            _gameOverScreen.Hide();
+            _luaScriptLoader.StartLevel();
+        }
+        private void InitGameStats()
+        {
             _gameStats.Initialize();
             _gameStats.CurrentLevel.Value++;
             if (_gameStats.CurrentLevel.Value > _gameStats.LastOpenedLevel.Value)
@@ -48,20 +61,6 @@ namespace KnifeHit.Scripts
 
             _gameStats.IsGameOver.Value = false;
             _gameStats.IsCompletedGame.Value = false;
-
-            _knifeSpawner.UpdateCurrentKnife();
-            _target.RemoveOldObjects();
-            _inputHandler.IsEnable = true;
-
-            //gameStats.LoadValues();
-            _target.SetDefaultSize();
-
-           // SetKnifeSkin(gameStats.IndexSelectKnife.Value);
-
-            _gameOverScreen.Hide();
-            _luaScriptLoader.StartLevel();
-
-           // _isCompleteGame = false;
         }
         public void Dispose()
         {

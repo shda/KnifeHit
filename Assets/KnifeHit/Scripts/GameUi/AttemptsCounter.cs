@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BlockBlast.Scripts.Common;
+using Common.Scripts;
 using TriInspector;
 using UnityEngine;
 

@@ -1,5 +1,5 @@
 using System;
-using BlockBlast.Scripts.Common;
+using Common.Scripts;
 using UnityEngine;
 
 namespace KnifeHit.Scripts

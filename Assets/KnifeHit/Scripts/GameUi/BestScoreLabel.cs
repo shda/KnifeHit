@@ -2,18 +2,26 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace KnifeHit.Scripts.GameUi
 {
     public class BestScoreLabel : MonoBehaviour
     {
-        [SerializeField] private GameStats gameStats;
         [SerializeField] private TextMeshProUGUI countTopBonuses;
-
-        private void Awake()
+        
+        private GameStats _gameStats;
+        
+        [Inject]
+        public void Construct(GameStats gameStats)
         {
-            gameStats.LoadValues();
-            gameStats.CountCurrentBonuses.Subscribe(i =>
+            _gameStats = gameStats;
+        }
+
+        private void Start()
+        {
+            _gameStats.LoadValues();
+            _gameStats.CountCurrentBonuses.Subscribe(i =>
             {
                 countTopBonuses.text = i.ToString();
             }).AddTo(this);

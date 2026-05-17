@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace KnifeHit.Scripts
 {
+
     public class Game : MonoBehaviour
     {
         [SerializeField] private float delayNextKnife;
@@ -163,7 +164,7 @@ namespace KnifeHit.Scripts
             luaScriptLoader.StopLevel();
             target.AnimationEndLevelAsync();
 
-            await UniTask.Delay(TimeSpan.FromSeconds(delay));
+            await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: token);
             if (token.IsCancellationRequested)
                 return;
 

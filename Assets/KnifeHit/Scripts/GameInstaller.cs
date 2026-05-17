@@ -22,6 +22,7 @@ namespace KnifeHit.Scripts
             Container.BindInterfacesAndSelfTo<GameStats>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<KnifeHitService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CompleteGameService>().AsSingle();
             
             Container.Bind<ListBonuses>().FromInstance(gameSettings.ListBonuses);
             
@@ -31,12 +32,12 @@ namespace KnifeHit.Scripts
             Container.Bind<GameOverScreen>().FromComponentInHierarchy().AsSingle();
             
             
-            Container.BindInterfacesAndSelfTo<GameBootstrap>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StartLevel>().AsSingle();
         }
 
         public override void Start()
         {
-            var bootstrap = Container.Resolve<GameBootstrap>();
+            var bootstrap = Container.Resolve<StartLevel>();
             bootstrap.StartGame();
         }
     }

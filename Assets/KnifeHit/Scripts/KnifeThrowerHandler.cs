@@ -6,7 +6,6 @@ using Zenject;
 
 namespace KnifeHit.Scripts
 {
-
     public class KnifeThrowerHandler : IInitializable
     {
         private readonly KnifeSpawner _knifeSpawner;
