@@ -2,7 +2,7 @@ using KnifeHit.Scripts.Bonuses;
 using UnityEngine;
 using Zenject;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class KnifeHitService : IInitializable
     {

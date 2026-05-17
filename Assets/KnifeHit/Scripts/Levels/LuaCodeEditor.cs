@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Levels
 {
     public class LuaCodeEditor : MonoBehaviour
     {

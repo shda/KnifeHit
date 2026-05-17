@@ -1,10 +1,9 @@
-using System;
 using Eflatun.SceneReference;
-using KnifeHit.Scripts.Menu.Shop;
+using KnifeHit.Scripts.MainMenu.Shop;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace KnifeHit.Scripts.Menu
+namespace KnifeHit.Scripts.MainMenu
 {
     public class MainMenu : MonoBehaviour
     {

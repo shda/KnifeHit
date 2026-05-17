@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace KnifeHit.Scripts.Menu.Shop
+namespace KnifeHit.Scripts.MainMenu.Shop
 {
     [Serializable]
     public class ItemInfo

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class InputHandler : ITickable
     {

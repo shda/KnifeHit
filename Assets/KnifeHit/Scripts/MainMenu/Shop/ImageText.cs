@@ -2,7 +2,7 @@ using System.Globalization;
 using TMPro;
 using UnityEngine;
 
-namespace KnifeHit.Scripts.Menu.Shop
+namespace KnifeHit.Scripts.MainMenu.Shop
 {
     public class ImageText : MonoBehaviour
     {

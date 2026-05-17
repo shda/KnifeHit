@@ -1,13 +1,12 @@
+using KnifeHit.Scripts.Collections;
+using KnifeHit.Scripts.Game;
 using KnifeHit.Scripts.Levels;
-using KnifeHit.Scripts.Lists;
 using KnifeHit.Scripts.LuaLogic;
 using UnityEngine;
 using Zenject;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Installers
 {
-
-
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private GameSettings gameSettings;

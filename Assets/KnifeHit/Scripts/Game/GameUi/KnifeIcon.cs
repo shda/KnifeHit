@@ -1,7 +1,6 @@
-using TriInspector;
 using UnityEngine;
 
-namespace KnifeHit.Scripts.GameUi
+namespace KnifeHit.Scripts.Game.GameUi
 {
     public class KnifeIcon : MonoBehaviour
     {

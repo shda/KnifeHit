@@ -1,10 +1,9 @@
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
-namespace KnifeHit.Scripts.GameUi
+namespace KnifeHit.Scripts.Game.GameUi
 {
     public class BestScoreLabel : MonoBehaviour
     {

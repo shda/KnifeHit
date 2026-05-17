@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KnifeHit.Scripts.Menu.Shop
+namespace KnifeHit.Scripts.MainMenu.Shop
 {
     public class ShopItem : MonoBehaviour
     {

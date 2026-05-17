@@ -1,3 +1,4 @@
+using KnifeHit.Scripts.Game;
 using UnityEngine;
 
 namespace KnifeHit.Scripts.Bonuses

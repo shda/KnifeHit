@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class GameOverScreen : MonoBehaviour
     {

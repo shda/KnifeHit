@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace KnifeHit.Scripts.Menu.Shop
+namespace KnifeHit.Scripts.MainMenu.Shop
 {
     public class ShopGridItems : MonoBehaviour
     {

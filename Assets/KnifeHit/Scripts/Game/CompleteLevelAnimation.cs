@@ -1,7 +1,7 @@
 using TriInspector;
 using UnityEngine;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class CompleteLevelAnimation : MonoBehaviour
     {

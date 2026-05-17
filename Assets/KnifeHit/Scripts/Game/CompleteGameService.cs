@@ -6,7 +6,7 @@ using UniRx;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class CompleteGameService : IInitializable , IDisposable
     {

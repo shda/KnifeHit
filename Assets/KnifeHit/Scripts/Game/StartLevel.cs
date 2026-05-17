@@ -1,7 +1,7 @@
 using System;
 using KnifeHit.Scripts.LuaLogic;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class StartLevel : IDisposable
     {
@@ -65,7 +65,7 @@ namespace KnifeHit.Scripts
             _gameStats.IsCompletedGame.Value = false;
             
             
-            
+    
         }
         public void Dispose()
         {

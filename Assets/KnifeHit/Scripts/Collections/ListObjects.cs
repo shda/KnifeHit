@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KnifeHit.Scripts.Lists
+namespace KnifeHit.Scripts.Collections
 {
     public class ListObjects<T> : ScriptableObject where T : Object
     {

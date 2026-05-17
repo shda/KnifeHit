@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Installers
 {
     public class ProjectInstaller : MonoInstaller
     {

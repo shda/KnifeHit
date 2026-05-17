@@ -1,8 +1,9 @@
+using Common.Scripts.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace KnifeHit.Scripts.Menu.Shop
+namespace KnifeHit.Scripts.MainMenu.Shop
 {
     public class ShopMenu : MonoBehaviour
     {
@@ -17,7 +18,7 @@ namespace KnifeHit.Scripts.Menu.Shop
         
         private ShopItem _selectItem;
         private GameStats _gameStats;
-        private ItemInfo _selectItemInfo => _selectItem.ItemInfo;
+        private ItemInfo SelectItemInfo => _selectItem.ItemInfo;
 
         [Inject]
         public void Construct(GameStats gameStats)
@@ -35,12 +36,12 @@ namespace KnifeHit.Scripts.Menu.Shop
         private void OnPressShopItem(ShopItem item)
         {
             _selectItem = item;
-            previewImage.sprite = _selectItemInfo.KnifeSprite;
+            previewImage.sprite = SelectItemInfo.KnifeSprite;
 
-            if (_selectItemInfo.IsCanUsing(_gameStats))
+            if (SelectItemInfo.IsCanUsing(_gameStats))
             {
                 HideAllLabels();
-                if (_selectItemInfo.IsSelect(_gameStats))
+                if (SelectItemInfo.IsSelect(_gameStats))
                 {
                     labelAlreadySelect.gameObject.SetActive(true);
                 }
@@ -52,11 +53,11 @@ namespace KnifeHit.Scripts.Menu.Shop
             else
             {
                 HideAllLabels();
-                if (_selectItemInfo.TryGetLevelOpen(out var levelOpen))
+                if (SelectItemInfo.TryGetLevelOpen(out var levelOpen))
                 {
                     openLevel.SetValue(levelOpen);
                 }
-                else if (_selectItemInfo.TryGetPrice(out var price))
+                else if (SelectItemInfo.TryGetPrice(out var price))
                 {
                     priceBuy.SetValue(price);
                     buttonBuy.gameObject.SetActive(true);
@@ -68,27 +69,26 @@ namespace KnifeHit.Scripts.Menu.Shop
 
         private void HideAllLabels()
         {
-            priceBuy.gameObject.SetActive(false);
-            openLevel.gameObject.SetActive(false);
-            labelAlreadySelect.gameObject.SetActive(false);
-            buttonBuy.gameObject.SetActive(false);
-            buttonSelect.gameObject.SetActive(false);
+            priceBuy.Hide();
+            openLevel.Hide();
+            labelAlreadySelect.Hide();
+            buttonBuy.Hide();
+            buttonSelect.Hide();
         }
 
         public void OnPressBuy()
         {
-            if (_selectItemInfo.IsCanBuy(_gameStats))
+            if (SelectItemInfo.IsCanBuy(_gameStats))
             {
-                _selectItemInfo.Buy(_gameStats);
+                SelectItemInfo.Buy(_gameStats);
                 _selectItem.UpdateSprite();
                 OnPressSelect();
-                //OnPressShopItem(_selectItem);
             }
         }
 
         public void OnPressSelect()
         {
-            _selectItemInfo.SelectItem(_gameStats);
+            SelectItemInfo.SelectItem(_gameStats);
             _selectItem.UpdateSprite();
             OnPressShopItem(_selectItem);
         }

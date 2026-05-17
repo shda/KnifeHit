@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using KnifeHit.Scripts.LuaLogic;
 using Zenject;
 
-namespace KnifeHit.Scripts
+namespace KnifeHit.Scripts.Game
 {
     public class KnifeThrowerHandler : IInitializable
     {
