@@ -21,13 +21,14 @@ namespace KnifeHit.Scripts
             Container.BindInterfacesAndSelfTo<KnifeThrowerHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameStats>().AsSingle();
             
+            Container.BindInterfacesAndSelfTo<KnifeHitService>().AsSingle();
+            
             Container.Bind<ListBonuses>().FromInstance(gameSettings.ListBonuses);
             
             Container.Bind<KnifeSpawner>().FromComponentInHierarchy().AsSingle();
             Container.Bind<RotatorHandler>().FromComponentInHierarchy().AsSingle();
             Container.Bind<Target>().FromComponentInHierarchy().AsSingle();
             Container.Bind<GameOverScreen>().FromComponentInHierarchy().AsSingle();
-            
             
             
             Container.BindInterfacesAndSelfTo<GameBootstrap>().AsSingle();

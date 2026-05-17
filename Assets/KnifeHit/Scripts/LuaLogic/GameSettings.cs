@@ -9,9 +9,11 @@ namespace KnifeHit.Scripts.LuaLogic
     {
         [SerializeField] private LuaAsset luaAsset;
         [SerializeField] private ListBonuses listBonuses;
+        [SerializeField] private float delayNextKnife;
         
         public LuaAsset LuaAsset => luaAsset;
         public ListBonuses ListBonuses => listBonuses;
+        public float DelayNextKnife => delayNextKnife;
         
     }
 }

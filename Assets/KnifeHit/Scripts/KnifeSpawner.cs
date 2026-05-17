@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using BlockBlast.Scripts.Common;
 using UnityEngine;
 
@@ -35,7 +33,6 @@ namespace KnifeHit.Scripts
         }
 
         private Knife _currentKnife;
-       // private readonly List<Knife> _spawnedKnifes = new();
 
         public Action<Knife, Collision2D> OnKnifeCollisionToOther;
         public Action<Knife, Collider2D> OnKnifeTriggerToOther;

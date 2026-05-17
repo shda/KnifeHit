@@ -108,7 +108,6 @@ namespace KnifeHit.Scripts
         {
             gameStats.CountCurrentBonuses.Value++;
             gameStats.SaveValues();
-
         }
 
         private void KnifeCollisionToOther(Knife knife, Collision2D collision)
