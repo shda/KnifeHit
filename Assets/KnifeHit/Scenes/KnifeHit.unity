@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 49222275}
   - component: {fileID: 49222276}
   m_Layer: 0
-  m_Name: GameSceneUi
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,13 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca95bae0b5d5ed4084c2fadce2650fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayNextKnife: 0.1
-  target: {fileID: 465265909}
-  gameOverScreen: {fileID: 75734023}
-  knifeSpawner: {fileID: 1735187983}
-  mainMenuScene: {asset: {fileID: 102900000, guid: f526deb6cf501414e8ca7f767b036004, type: 3}, guid: f526deb6cf501414e8ca7f767b036004}
-  _isCompleteGame: 0
-  _isGameOver: 0
 --- !u!114 &318523553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,7 +1818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1516571880
 Transform:
   m_ObjectHideFlags: 0
