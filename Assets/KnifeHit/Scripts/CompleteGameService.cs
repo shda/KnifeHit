@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using KnifeHit.Scripts.LuaLogic;
 using UniRx;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace KnifeHit.Scripts
@@ -14,21 +15,24 @@ namespace KnifeHit.Scripts
         private readonly LuaScriptLoader _luaScriptLoader;
         private readonly Target _target;
         private readonly StartLevel _startLevel;
+        private readonly GameSettings _gameSettings;
         
         private readonly CompositeDisposable _disposables = new();
-        
+
         public CompleteGameService(
             GameStats gameStats,
             GameOverScreen gameOverScreen,
             LuaScriptLoader luaScriptLoader,
             Target target,
-            StartLevel startLevel)
+            StartLevel startLevel,
+            GameSettings gameSettings)
         {
             _gameStats = gameStats;
             _luaScriptLoader = luaScriptLoader;
             _target = target;
             _gameOverScreen = gameOverScreen;
             _startLevel = startLevel;
+            _gameSettings = gameSettings;
         }
         public void Initialize()
         {
@@ -46,7 +50,7 @@ namespace KnifeHit.Scripts
         }
         private void QuitGame()
         {
-            throw new NotImplementedException();
+            SceneManager.LoadScene(_gameSettings.MainMenuScene.Name);
         }
         private void ResetLevelToDefault()
         {

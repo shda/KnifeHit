@@ -38,7 +38,9 @@ namespace KnifeHit.Scripts
         {
             InitGameStats();
 
+            _knifeSpawner.SkinIndex = _gameStats.IndexSelectKnife.Value;
             _knifeSpawner.UpdateCurrentKnife();
+            
             _target.RemoveOldObjects();
             _inputHandler.IsEnable = true;
             
@@ -61,6 +63,9 @@ namespace KnifeHit.Scripts
 
             _gameStats.IsGameOver.Value = false;
             _gameStats.IsCompletedGame.Value = false;
+            
+            
+            
         }
         public void Dispose()
         {

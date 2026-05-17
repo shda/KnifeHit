@@ -27,7 +27,7 @@ namespace KnifeHit.Scripts
             Container.Bind<ListBonuses>().FromInstance(gameSettings.ListBonuses);
             
             Container.Bind<KnifeSpawner>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<RotatorHandler>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<Rotator>().FromComponentInHierarchy().AsSingle();
             Container.Bind<Target>().FromComponentInHierarchy().AsSingle();
             Container.Bind<GameOverScreen>().FromComponentInHierarchy().AsSingle();
             

@@ -14,11 +14,11 @@ namespace KnifeHit.Scripts.LuaLogic
     [LuaObject]
     public partial class LevelLuaProxy
     {
-        [Inject] private RotatorHandler rotatorHandler;
-        [Inject] private ListBonuses listBonuses;
-        [Inject] private KnifeSpawner listKnifes;
-        [Inject] private Target target;
-        [Inject] private GameStats gameStats;
+        [Inject] private Rotator _rotator;
+        [Inject] private ListBonuses _listBonuses;
+        [Inject] private KnifeSpawner _listKnifes;
+        [Inject] private Target _target;
+        [Inject] private GameStats _gameStats;
         
         [LuaMember]
         private void SetCountUserKnives(int count, CancellationToken cancellation)
@@ -26,15 +26,14 @@ namespace KnifeHit.Scripts.LuaLogic
             if (cancellation.IsCancellationRequested)
                 return;
             
-            gameStats.CountAllUserKnives.SetValueAndForceNotify(count);
-            gameStats.CountUserKnives.SetValueAndForceNotify(count);
+            _gameStats.CountAllUserKnives.SetValueAndForceNotify(count);
+            _gameStats.CountUserKnives.SetValueAndForceNotify(count);
         }
-        
         
         [LuaMember]
         public void SetKnifeSpeed(float speed)
         {
-            listKnifes.KnifeSpeed = speed;
+            _listKnifes.KnifeSpeed = speed;
         }
 
         [LuaMember]
@@ -50,13 +49,13 @@ namespace KnifeHit.Scripts.LuaLogic
                 return;
 
             Debug.Log("SetBonus");
-            var bonus = Object.Instantiate(listBonuses.GetWithOverflow(index));
+            var bonus = Object.Instantiate(_listBonuses.GetWithOverflow(index));
             //Todo fixed
             bonus.OnReturnToPool = o =>
             {
                 Object.DestroyImmediate(o.gameObject);
             };
-            target.AddObject(bonus, angle);
+            _target.AddObject(bonus, angle);
         }
 
         [LuaMember]
@@ -65,7 +64,7 @@ namespace KnifeHit.Scripts.LuaLogic
             if (cancellation.IsCancellationRequested)
                 return;
             
-            target.SetSkin(skinIndex);
+            _target.SetSkin(skinIndex);
             Debug.Log("SetTargetSkin " + skinIndex);
         }
 
@@ -76,8 +75,7 @@ namespace KnifeHit.Scripts.LuaLogic
                 return;
             
             Debug.Log("SetUserKnifeSkin");
-            listKnifes.SkinIndex = skinIndex;
-           // game.SetKnifeSkin(skinIndex);
+            _listKnifes.SkinIndex = skinIndex;
         }
    
         [LuaMember]
@@ -88,12 +86,12 @@ namespace KnifeHit.Scripts.LuaLogic
 
             Debug.Log("SetObstacle");
 
-            var knife = listKnifes.GetKnife(); // Object.Instantiate(listKnifes.GetWithOverflow(index));
+            var knife = _listKnifes.GetKnife(); 
             knife.SetSkinIndex(index);
             knife.IsMoving = false;
             knife.SetStaticRigidbody2D();
 
-            target.AddObject(knife, angle, 180);
+            _target.AddObject(knife, angle, 180);
         }
 
         
@@ -111,8 +109,7 @@ namespace KnifeHit.Scripts.LuaLogic
             if (cancellation.IsCancellationRequested)
                 return 0;
 
-            await rotatorHandler.PlayStepAsync(result, cancellation);
-    
+            await _rotator.PlayStepAsync(result, cancellation);
             return 0;
         }
        

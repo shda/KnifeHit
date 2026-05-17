@@ -7,7 +7,7 @@ namespace KnifeHit.Scripts
 {
     public class InputHandler : ITickable
     {
-        public Action OnClick;
+        public Action OnClick { get; set; }
         
         public bool IsEnable { get; set; }
         

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts.Levels
 {
-    public class RotatorHandler : MonoBehaviour
+    public class Rotator : MonoBehaviour
     {
         [SerializeField] private Transform target;
         private CancellationTokenSource _cancellation;

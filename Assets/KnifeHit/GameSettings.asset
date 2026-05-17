@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01239a21383241819753361f908d68c9, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: KnifeHit.Game::KnifeHit.Scripts.LuaLogic.GameSettings
+  mainMenuScene:
+    asset: {fileID: 102900000, guid: f526deb6cf501414e8ca7f767b036004, type: 3}
+    guid: f526deb6cf501414e8ca7f767b036004
   luaAsset: {fileID: -6979533126094156877, guid: df46e30908388944eaf5ce48468d980e, type: 3}
   listBonuses: {fileID: 11400000, guid: 7d0e112e962b8d1438f985a64716b4c9, type: 2}
   delayNextKnife: 0.1
