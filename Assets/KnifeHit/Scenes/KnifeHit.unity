@@ -442,9 +442,9 @@ MonoBehaviour:
   target: {fileID: 465265909}
   gameOverScreen: {fileID: 75734023}
   knifeSpawner: {fileID: 1735187983}
-  mainMenuScene:
-    asset: {fileID: 102900000, guid: f526deb6cf501414e8ca7f767b036004, type: 3}
-    guid: f526deb6cf501414e8ca7f767b036004
+  mainMenuScene: {asset: {fileID: 102900000, guid: f526deb6cf501414e8ca7f767b036004, type: 3}, guid: f526deb6cf501414e8ca7f767b036004}
+  _isCompleteGame: 0
+  _isGameOver: 0
 --- !u!114 &318523553
 MonoBehaviour:
   m_ObjectHideFlags: 0

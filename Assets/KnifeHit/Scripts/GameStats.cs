@@ -67,8 +67,6 @@ namespace KnifeHit.Scripts
             PlayerPrefs.SetInt(nameof(CountCurrentBonuses), CountCurrentBonuses.Value);
             PlayerPrefs.SetInt(nameof(LastOpenedLevel), LastOpenedLevel.Value);
             PlayerPrefs.SetInt(nameof(IndexSelectKnife), IndexSelectKnife.Value);
-            
-          //  PlayerPrefs.SetString(nameof(OpenedShopItems), string.Join(",", OpenedShopItems.Value));
         }
     }
 }

@@ -6,6 +6,8 @@ using Zenject;
 
 namespace KnifeHit.Scripts
 {
+
+
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private GameSettings gameSettings;
@@ -19,7 +21,8 @@ namespace KnifeHit.Scripts
             
             Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<KnifeThrowerHandler>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GameStats>().AsSingle();
+            
+            
             
             Container.BindInterfacesAndSelfTo<KnifeHitService>().AsSingle();
             Container.BindInterfacesAndSelfTo<CompleteGameService>().AsSingle();

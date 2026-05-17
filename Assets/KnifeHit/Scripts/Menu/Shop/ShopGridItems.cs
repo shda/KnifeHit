@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace KnifeHit.Scripts.Menu.Shop
 {
@@ -9,9 +10,16 @@ namespace KnifeHit.Scripts.Menu.Shop
         [SerializeField] private Transform gridItemParent;
         [SerializeField] private CollectionMarketItems collectionMarketItems;
         [SerializeField] private GridSelector gridSelector;
-        [SerializeField] private GameStats gameStats;
 
         public Action<ShopItem> OnPressShopItem;
+        
+        private GameStats _gameStats;
+
+        [Inject]
+        public void Construct(GameStats gameStats)
+        {
+            _gameStats = gameStats;
+        }
         
         private void Start()
         {
@@ -23,7 +31,7 @@ namespace KnifeHit.Scripts.Menu.Shop
                 var newItem = Instantiate(shopItemPrefab, gridItemParent);
                 newItem.transform.localPosition = Vector3.zero;
                 newItem.transform.localScale = Vector3.one;
-                newItem.SetInfo(item , gameStats);
+                newItem.SetInfo(item , _gameStats);
                 newItem.OnPress = OnPress;
                 
                 if(!firstSelected)

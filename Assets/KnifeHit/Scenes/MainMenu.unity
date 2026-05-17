@@ -1278,6 +1278,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403775188}
   m_CullTransparentMesh: 1
+--- !u!1 &437837323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437837326}
+  - component: {fileID: 437837325}
+  - component: {fileID: 437837324}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &437837324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437837323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f34c6ea11f145b99722e5e850a32bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: KnifeHit.Game::KnifeHit.Scripts.MainMenuInstaller
+--- !u!114 &437837325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437837323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.SceneContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 437837324}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &437837326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437837323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &487189202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,7 +1643,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopGridItems: {fileID: 1003785068}
   previewImage: {fileID: 495267906}
-  gameStats: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
   labelAlreadySelect: {fileID: 223819356}
   priceBuy: {fileID: 8385521824252752647}
   openLevel: {fileID: 1645602823}
@@ -2332,7 +2408,6 @@ MonoBehaviour:
   gridItemParent: {fileID: 1770193895}
   collectionMarketItems: {fileID: 11400000, guid: b940adc031950e34e84dc40833f504ca, type: 2}
   gridSelector: {fileID: 753230588}
-  gameStats: {fileID: 11400000, guid: f79f06bf34c43c349ba17dd97d9a2b52, type: 2}
 --- !u!1 &1046126548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,7 +3834,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1366529507}
         m_TargetAssemblyTypeName: KnifeHit.Scripts.Menu.MainMenu, FlipperDunk.Game
-        m_MethodName: OnPressButtonOperSelectKnife
+        m_MethodName: OnPressButtonOpenSelectKnife
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5334,6 +5409,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 437837326}
   - {fileID: 146096730}
   - {fileID: 1366529506}
   - {fileID: 1046126551}

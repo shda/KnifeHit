@@ -22,8 +22,7 @@ namespace KnifeHit.Scripts.Menu.Shop
             if (alwaysOpen)
                 return true;
             
-            //Is bayed
-            if (gameStats.OpenedShopItems.Value.Contains(indexImage))
+            if (IsBayed(gameStats))
                 return true;
             
             if (needOpenLevel != -1)
@@ -31,6 +30,12 @@ namespace KnifeHit.Scripts.Menu.Shop
                 return gameStats.LastOpenedLevel.Value >= needOpenLevel;
             }
             
+            return false;
+        }
+        private bool IsBayed(GameStats gameStats)
+        {
+            if (gameStats.OpenedShopItems.Value.Contains(indexImage))
+                return true;
             return false;
         }
 

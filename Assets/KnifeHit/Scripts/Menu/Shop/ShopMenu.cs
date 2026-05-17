@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace KnifeHit.Scripts.Menu.Shop
 {
@@ -8,21 +9,27 @@ namespace KnifeHit.Scripts.Menu.Shop
         [SerializeField] private ShopGridItems shopGridItems;
         [SerializeField] private Image previewImage;
         
-        [SerializeField] private GameStats gameStats;
-        
         [SerializeField] private Transform labelAlreadySelect;
         [SerializeField] private ImageText priceBuy;
         [SerializeField] private ImageText openLevel;
         [SerializeField] private Button buttonBuy;
         [SerializeField] private Button buttonSelect;
-
-        private ShopItem _selectItem;
-        private ItemInfo _selectItemInfo => _selectItem.ItemInfo;
         
-        private void Awake()
+        private ShopItem _selectItem;
+        private GameStats _gameStats;
+        private ItemInfo _selectItemInfo => _selectItem.ItemInfo;
+
+        [Inject]
+        public void Construct(GameStats gameStats)
+        {
+            _gameStats = gameStats;
+        }
+        
+        
+        private void Start()
         {
             shopGridItems.OnPressShopItem = OnPressShopItem;
-            gameStats.LoadValues();
+            _gameStats.LoadValues();
         }
 
         private void OnPressShopItem(ShopItem item)
@@ -30,10 +37,10 @@ namespace KnifeHit.Scripts.Menu.Shop
             _selectItem = item;
             previewImage.sprite = _selectItemInfo.KnifeSprite;
 
-            if (_selectItemInfo.IsCanUsing(gameStats))
+            if (_selectItemInfo.IsCanUsing(_gameStats))
             {
                 HideAllLabels();
-                if (_selectItemInfo.IsSelect(gameStats))
+                if (_selectItemInfo.IsSelect(_gameStats))
                 {
                     labelAlreadySelect.gameObject.SetActive(true);
                 }
@@ -54,7 +61,7 @@ namespace KnifeHit.Scripts.Menu.Shop
                     priceBuy.SetValue(price);
                     buttonBuy.gameObject.SetActive(true);
 
-                    buttonBuy.interactable = price <= gameStats.CountCurrentBonuses.Value;
+                    buttonBuy.interactable = price <= _gameStats.CountCurrentBonuses.Value;
                 }
             }
         }
@@ -70,9 +77,9 @@ namespace KnifeHit.Scripts.Menu.Shop
 
         public void OnPressBuy()
         {
-            if (_selectItemInfo.IsCanBuy(gameStats))
+            if (_selectItemInfo.IsCanBuy(_gameStats))
             {
-                _selectItemInfo.Buy(gameStats);
+                _selectItemInfo.Buy(_gameStats);
                 _selectItem.UpdateSprite();
                 OnPressSelect();
                 //OnPressShopItem(_selectItem);
@@ -81,7 +88,7 @@ namespace KnifeHit.Scripts.Menu.Shop
 
         public void OnPressSelect()
         {
-            _selectItemInfo.SelectItem(gameStats);
+            _selectItemInfo.SelectItem(_gameStats);
             _selectItem.UpdateSprite();
             OnPressShopItem(_selectItem);
         }

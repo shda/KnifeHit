@@ -19,7 +19,7 @@ namespace KnifeHit.Scripts.Menu.Shop
             if(!_targetRect)
                 return;
             
-            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, _targetRect.position);
+            var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, _targetRect.position);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 rootRect.parent as RectTransform,
                 screenPoint,

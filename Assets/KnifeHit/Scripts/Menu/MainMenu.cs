@@ -22,7 +22,7 @@ namespace KnifeHit.Scripts.Menu
             SceneManager.LoadScene(gameScene.Name);
         }
 
-        public void OnPressButtonOperSelectKnife()
+        public void OnPressButtonOpenSelectKnife()
         {
             welcomeMenu.gameObject.SetActive(false);
             shopMenu.gameObject.SetActive(true);
