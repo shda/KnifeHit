@@ -17,6 +17,5 @@ namespace KnifeHit.Scripts.LuaLogic
         public ListBonuses ListBonuses => listBonuses;
         public float DelayNextKnife => delayNextKnife;
         public SceneReference MainMenuScene => mainMenuScene;
-        
     }
 }

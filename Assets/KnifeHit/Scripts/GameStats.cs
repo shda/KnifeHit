@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using UniRx;
@@ -5,19 +6,18 @@ using UnityEngine;
 
 namespace KnifeHit.Scripts
 {
-    public class GameStats
+    public class GameStats : IDisposable
     {
-        public IntReactiveProperty CountCurrentBonuses { get;set; } = new();
-        public IntReactiveProperty CurrentLevel { get;set; } = new();
-        public IntReactiveProperty CountUserKnives { get;set; } = new();
-        public IntReactiveProperty CountAllUserKnives { get;set; } = new();
-        public IntReactiveProperty LastOpenedLevel { get;set; } = new();
-        public ReactiveProperty<HashSet<int>> OpenedShopItems { get;set; } = new();
-        public IntReactiveProperty IndexSelectKnife { get;set; } = new();
+        public IntReactiveProperty CountCurrentBonuses { get; } = new();
+        public IntReactiveProperty CurrentLevel { get; } = new();
+        public IntReactiveProperty CountUserKnives { get; } = new();
+        public IntReactiveProperty CountAllUserKnives { get; } = new();
+        public IntReactiveProperty LastOpenedLevel { get; } = new();
+        public ReactiveProperty<HashSet<int>> OpenedShopItems { get; } = new();
+        public IntReactiveProperty IndexSelectKnife { get; } = new();
+        public BoolReactiveProperty IsGameOver { get; } = new();
         
-        public BoolReactiveProperty IsGameOver { get; set; } = new();
-        
-        public BoolReactiveProperty IsCompletedGame { get; set; } = new();
+        public BoolReactiveProperty IsCompletedGame { get; } = new();
         
         public CancellationTokenSource TokenSource { get; private set; } = new();
 
@@ -34,7 +34,7 @@ namespace KnifeHit.Scripts
             TokenSource = null;
         }
         
-        private void ParsingBoughtItems()
+        private void LoadingBoughtItems()
         {
            var openedItemsStr = PlayerPrefs.GetString(nameof(OpenedShopItems));
            if (string.IsNullOrEmpty(openedItemsStr))
@@ -59,7 +59,7 @@ namespace KnifeHit.Scripts
             LastOpenedLevel.Value = PlayerPrefs.GetInt(nameof(LastOpenedLevel));
             IndexSelectKnife.Value = PlayerPrefs.GetInt(nameof(IndexSelectKnife));
             
-            ParsingBoughtItems();
+            LoadingBoughtItems();
         }
 
         public void SaveValues()

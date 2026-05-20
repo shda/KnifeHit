@@ -26,7 +26,6 @@ namespace KnifeHit.Scripts.MainMenu.Shop
             _gameStats = gameStats;
         }
         
-        
         private void Start()
         {
             shopGridItems.OnPressShopItem = OnPressShopItem;
